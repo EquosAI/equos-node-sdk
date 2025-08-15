@@ -6,6 +6,9 @@ import { HttpUtils } from './utils/http.utils';
 export class Equos {
   private readonly http: HttpUtils;
 
+  private avatarApi: EquosAvatar;
+  private sessionApi: EquosSession;
+
   private constructor(
     private readonly apiKey: string,
     private readonly version: string = 'v1',
@@ -15,6 +18,9 @@ export class Equos {
       this.version,
       this.apiKey,
     );
+
+    this.avatarApi = new EquosAvatar(this.http);
+    this.sessionApi = new EquosSession(this.http);
   }
 
   static client(apiKey: string): Equos {
@@ -22,10 +28,10 @@ export class Equos {
   }
 
   get avatars() {
-    return new EquosAvatar(this.http);
+    return this.avatarApi;
   }
 
   get sessions() {
-    return new EquosSession(this.http);
+    return this.sessionApi;
   }
 }
