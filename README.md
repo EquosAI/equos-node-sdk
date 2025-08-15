@@ -1,5 +1,5 @@
 # @equos/node-sdk
-[Equos.ai](https://equos.ai) official node js SDK.
+[Equos.ai](https://www.equos.ai) official node js SDK.
 
 ## Prerequisites
 - Go to [Equos Studio](https://studio.equos.ai).
