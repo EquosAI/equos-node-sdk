@@ -11,16 +11,16 @@
     "equos.ai",
     "equos"
   ],
-  "homepage": "https://github.com/LipittSAS/equos-node#readme",
+  "homepage": "https://github.com/EquosAI/equos-node-sdk#readme",
   "bugs": {
-    "url": "https://github.com/LipittSAS/equos-node/issues"
+    "url": "https://github.com/EquosAI/equos-node-sdk/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LipittSAS/equos-node.git"
+    "url": "git+https://github.com/EquosAI/equos-node-sdk.git"
   },
   "license": "ISC",
-  "author": "combis.loic@gmail.com",
+  "author": "Loïc Combis <https://www.linkedin.com/in/lo%C3%AFc-combis-a211a813a/>",
   "type": "commonjs",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
