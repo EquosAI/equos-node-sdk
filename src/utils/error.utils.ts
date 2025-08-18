@@ -7,13 +7,10 @@ export class ErrorUtils {
     'UNKNOWN_ERROR',
   );
 
-  static convertToEquosError(e: unknown): never {
-    if (axios.isAxiosError(e)) {
-      throw new EquosError(e.response?.data?.message || e.message, e.code);
-    } else if (e instanceof Error) {
-      throw new EquosError(e.message);
-    }
-
-    throw ErrorUtils.UNKNOWN_ERROR;
+  static convertToEquosError(e: any): never {
+    throw new EquosError(
+      e.response?.data?.message || e.message || 'An unknown error occured.',
+      e.code,
+    );
   }
 }
