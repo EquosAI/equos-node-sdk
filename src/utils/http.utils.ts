@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 export class HttpUtils {
   constructor(
@@ -18,7 +18,15 @@ export class HttpUtils {
           'x-api-key': this.apiKey,
         },
       })
-      .then((response) => response.data);
+      .then((response) => response.data)
+      .catch((e: unknown) => {
+        if (e instanceof AxiosError) {
+          throw new Error(
+            e.response?.data || { message: e?.message, code: e?.code },
+          );
+        }
+        throw e;
+      });
   }
 
   async post<T, U>(path: string, data: T): Promise<U> {
@@ -28,7 +36,15 @@ export class HttpUtils {
           'x-api-key': this.apiKey,
         },
       })
-      .then((response) => response.data);
+      .then((response) => response.data)
+      .catch((e: unknown) => {
+        if (e instanceof AxiosError) {
+          throw new Error(
+            e.response?.data || { message: e?.message, code: e?.code },
+          );
+        }
+        throw e;
+      });
   }
 
   async patch<T, U>(path: string, data: T): Promise<U> {
@@ -38,6 +54,14 @@ export class HttpUtils {
           'x-api-key': this.apiKey,
         },
       })
-      .then((response) => response.data);
+      .then((response) => response.data)
+      .catch((e: unknown) => {
+        if (e instanceof AxiosError) {
+          throw new Error(
+            e.response?.data || { message: e?.message, code: e?.code },
+          );
+        }
+        throw e;
+      });
   }
 }
