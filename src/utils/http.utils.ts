@@ -39,9 +39,7 @@ export class HttpUtils {
       .then((response) => response.data)
       .catch((e: unknown) => {
         if (e instanceof AxiosError) {
-          throw new Error(
-            e.response?.data || { message: e?.message, code: e?.code },
-          );
+          throw e.response?.data || { message: e?.message, code: e?.code };
         }
         throw e;
       });
@@ -57,9 +55,7 @@ export class HttpUtils {
       .then((response) => response.data)
       .catch((e: unknown) => {
         if (e instanceof AxiosError) {
-          throw new Error(
-            e.response?.data || { message: e?.message, code: e?.code },
-          );
+          throw e.response?.data || { message: e?.message, code: e?.code };
         }
         throw e;
       });
