@@ -4,31 +4,38 @@ import {
   EquosSessionData,
   ListEquosSessionsData,
 } from '../types/session.type';
+import { ErrorUtils } from '../utils/error.utils';
 import { HttpUtils } from '../utils/http.utils';
 
 export class EquosSession {
   constructor(private readonly http: HttpUtils) {}
 
-  get(id: string): Promise<EquosSessionData> {
-    return this.http.get<EquosSessionData>(`/sessions/${id}`);
+  async get(id: string): Promise<EquosSessionData> {
+    return this.http
+      .get<EquosSessionData>(`/sessions/${id}`)
+      .catch(ErrorUtils.convertToEquosError);
   }
 
-  create(
+  async create(
     data: CreateEquosSessionRequestData,
   ): Promise<CreateEquosSessionResponseData> {
-    return this.http.post<
-      CreateEquosSessionRequestData,
-      CreateEquosSessionResponseData
-    >('/sessions', data);
+    return this.http
+      .post<
+        CreateEquosSessionRequestData,
+        CreateEquosSessionResponseData
+      >('/sessions', data)
+      .catch(ErrorUtils.convertToEquosError);
   }
 
-  list(skip = 0, take = 10): Promise<ListEquosSessionsData> {
-    return this.http.get<ListEquosSessionsData>(
-      `/sessions?skip=${skip}&take=${take}`,
-    );
+  async list(skip = 0, take = 10): Promise<ListEquosSessionsData> {
+    return this.http
+      .get<ListEquosSessionsData>(`/sessions?skip=${skip}&take=${take}`)
+      .catch(ErrorUtils.convertToEquosError);
   }
 
-  stop(id: string): Promise<EquosSessionData> {
-    return this.http.patch<{}, EquosSessionData>(`/sessions/${id}/stop`, {});
+  async stop(id: string): Promise<EquosSessionData> {
+    return this.http
+      .patch<{}, EquosSessionData>(`/sessions/${id}/stop`, {})
+      .catch(ErrorUtils.convertToEquosError);
   }
 }
