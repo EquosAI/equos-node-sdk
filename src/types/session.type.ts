@@ -2,6 +2,7 @@ export interface EquosSessionData {
   id: string;
   name: string;
   provider: string;
+  status: string;
   client?: string;
   host: {
     serverUrl: string;
