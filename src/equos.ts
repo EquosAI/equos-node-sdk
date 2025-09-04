@@ -3,42 +3,42 @@ import { EquosSession } from './apis/session';
 import { ConstantsUtils } from './utils/constants.utils';
 import { HttpUtils } from './utils/http.utils';
 
+export interface EquosOptions {
+  /**
+   * API version to use (default: v1)
+   */
+  version?: string;
+  /**
+   * API endpoint to use (default: https://api.equos.ai)
+   * Can leave blank to use the default endpoint.
+   */
+  endpoint?: string;
+}
+
 export class Equos {
   private readonly http: HttpUtils;
 
   private avatarApi: EquosAvatar;
   private sessionApi: EquosSession;
 
+  private readonly version: string;
+  private readonly endpoint: string;
+
   private constructor(
-    private readonly env: 'prod' | 'staging' | 'local' = 'prod',
     private readonly apiKey: string,
-    private readonly version: string = 'v1',
+    readonly opts?: EquosOptions,
   ) {
-    this.http = new HttpUtils(this.apiUrl, this.version, this.apiKey);
+    this.endpoint = opts?.endpoint || ConstantsUtils.DEFAULT_ENDPOINT;
+    this.version = opts?.version || ConstantsUtils.DEFAULT_VERSION;
+
+    this.http = new HttpUtils(this.endpoint, this.version, this.apiKey);
 
     this.avatarApi = new EquosAvatar(this.http);
     this.sessionApi = new EquosSession(this.http);
   }
 
-  get apiUrl(): string {
-    switch (this.env) {
-      case 'prod':
-        return ConstantsUtils.PROD_API_BASE_URL;
-      case 'staging':
-        return ConstantsUtils.STAGING_API_BASE_URL;
-      case 'local':
-        return ConstantsUtils.LOCAL_API_BASE_URL;
-      default:
-        throw new Error(`Unknown environment: ${this.env}`);
-    }
-  }
-
-  static client(
-    env: 'prod' | 'staging' | 'local',
-    apiKey: string,
-    version: string = 'v1',
-  ): Equos {
-    return new Equos(env, apiKey, version);
+  static client(apiKey: string, opts?: EquosOptions): Equos {
+    return new Equos(apiKey, opts);
   }
 
   get avatars() {
