@@ -1,5 +1,6 @@
-import { EquosAvatar } from './apis/avatar';
-import { EquosSession } from './apis/session';
+import { EquosAgentApi } from './apis/agent';
+import { EquosAvatarApi } from './apis/avatar';
+import { EquosSessionApi } from './apis/session';
 import { ConstantsUtils } from './utils/constants.utils';
 import { HttpUtils } from './utils/http.utils';
 
@@ -18,8 +19,9 @@ export interface EquosOptions {
 export class Equos {
   private readonly http: HttpUtils;
 
-  private avatarApi: EquosAvatar;
-  private sessionApi: EquosSession;
+  private readonly avatarApi: EquosAvatarApi;
+  private readonly sessionApi: EquosSessionApi;
+  private readonly agentApi: EquosAgentApi;
 
   private readonly version: string;
   private readonly endpoint: string;
@@ -33,19 +35,24 @@ export class Equos {
 
     this.http = new HttpUtils(this.endpoint, this.version, this.apiKey);
 
-    this.avatarApi = new EquosAvatar(this.http);
-    this.sessionApi = new EquosSession(this.http);
+    this.avatarApi = new EquosAvatarApi(this.http);
+    this.sessionApi = new EquosSessionApi(this.http);
+    this.agentApi = new EquosAgentApi(this.http);
   }
 
   static client(apiKey: string, opts?: EquosOptions): Equos {
     return new Equos(apiKey, opts);
   }
 
-  get avatars() {
+  get agents(): EquosAgentApi {
+    return this.agentApi;
+  }
+
+  get avatars(): EquosAvatarApi {
     return this.avatarApi;
   }
 
-  get sessions() {
+  get sessions(): EquosSessionApi {
     return this.sessionApi;
   }
 }

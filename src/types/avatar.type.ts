@@ -1,21 +1,29 @@
-export interface CreateEquosAvatarData {
+import { CreateEquosAgentRequest, EquosAgent } from './agent.type';
+
+export interface CreateEquosAvatarRequest {
+  identity: string;
   name: string;
   refImage: string;
+  agentId?: string;
+  agent?: CreateEquosAgentRequest;
 }
 
-export interface EquosAvatarData {
+export interface EquosAvatar {
   id: string;
+  organizationId: string;
+  identity: string;
   name: string;
   thumbnailUrl: string;
-  apiKeyId: string;
-  organizationId: string;
   createdAt: Date;
   updatedAt: Date;
+
+  agentId?: string;
+  agent?: EquosAgent;
 }
 
-export interface ListEquosAvatarsData {
+export interface ListEquosAvatarsResponse {
   skip: number;
   take: number;
   total: number;
-  avatars: EquosAvatarData[];
+  avatars: EquosAvatar[];
 }

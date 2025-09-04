@@ -1,70 +1,54 @@
-export interface EquosSessionData {
+import { CreateEquosAgentRequest, EquosAgent } from './agent.type';
+import { CreateEquosAvatarRequest, EquosAvatar } from './avatar.type';
+
+export interface EquosParticipantIdentity {
+  identity: string;
+  name: string;
+}
+
+export interface CreateEquosSessionRequest {
+  name: string;
+  client?: string;
+  host?: {
+    serverUrl: string;
+    accessToken: string;
+  };
+  agent?: { id: string } | CreateEquosAgentRequest;
+  avatar: { id: string } | CreateEquosAvatarRequest;
+  remoteAgentConnectingIdentity?: EquosParticipantIdentity;
+  consumerIdentity?: EquosParticipantIdentity;
+}
+
+export interface EquosSession {
   id: string;
+  organizationId: string;
+  freemium: boolean;
   name: string;
   provider: string;
-  status: string;
   client?: string;
+  status: string;
   host: {
     serverUrl: string;
   };
-  avatar: {
-    id: string;
-    identity?: string;
-    name?: string;
-    thumbnailUrl?: string;
-    createdAt: Date;
-    updatedAt: Date;
-  };
-  agent?: {
-    instructions: string;
-  };
+  avatarId?: string;
+  avatar: EquosAvatar;
+  agentId?: string;
+  agent?: EquosAgent;
   startedAt: Date;
   endedAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
 
-export interface CreateEquosSessionRequestData {
-  name: string;
-
-  client?: string;
-
-  host?: {
-    serverUrl: string;
-    accessToken: string;
-  };
-
-  agent?: {
-    instructions: string;
-  };
-
-  avatar: {
-    id?: string;
-    identity?: string;
-    name?: string;
-    refImage?: string;
-  };
-
-  remoteAgentConnectingIdentity?: {
-    identity: string;
-    name: string;
-  };
-
-  consumerIdentity?: {
-    identity: string;
-    name: string;
-  };
-}
-
-export interface CreateEquosSessionResponseData {
-  session: EquosSessionData;
+export interface CreateEquosSessionResponse {
+  session: EquosSession;
   consumerAccessToken?: string;
   remoteAgentAccessToken?: string;
 }
 
-export interface ListEquosSessionsData {
+export interface ListEquosSessionsResponse {
   skip: number;
   take: number;
   total: number;
-  sessions: EquosSessionData[];
+  sessions: EquosSession[];
 }

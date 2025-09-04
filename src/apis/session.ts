@@ -1,41 +1,41 @@
 import {
-  CreateEquosSessionRequestData,
-  CreateEquosSessionResponseData,
-  EquosSessionData,
-  ListEquosSessionsData,
+  CreateEquosSessionRequest,
+  CreateEquosSessionResponse,
+  EquosSession,
+  ListEquosSessionsResponse,
 } from '../types/session.type';
 import { ErrorUtils } from '../utils/error.utils';
 import { HttpUtils } from '../utils/http.utils';
 
-export class EquosSession {
+export class EquosSessionApi {
   constructor(private readonly http: HttpUtils) {}
 
-  async get(id: string): Promise<EquosSessionData> {
+  async get(id: string): Promise<EquosSession> {
     return this.http
-      .get<EquosSessionData>(`/sessions/${id}`)
+      .get<EquosSession>(`/sessions/${id}`)
       .catch(ErrorUtils.convertToEquosError);
   }
 
   async create(
-    data: CreateEquosSessionRequestData,
-  ): Promise<CreateEquosSessionResponseData> {
+    data: CreateEquosSessionRequest,
+  ): Promise<CreateEquosSessionResponse> {
     return this.http
       .post<
-        CreateEquosSessionRequestData,
-        CreateEquosSessionResponseData
+        CreateEquosSessionRequest,
+        CreateEquosSessionResponse
       >('/sessions', data)
       .catch(ErrorUtils.convertToEquosError);
   }
 
-  async list(skip = 0, take = 10): Promise<ListEquosSessionsData> {
+  async list(skip = 0, take = 10): Promise<ListEquosSessionsResponse> {
     return this.http
-      .get<ListEquosSessionsData>(`/sessions?skip=${skip}&take=${take}`)
+      .get<ListEquosSessionsResponse>(`/sessions?skip=${skip}&take=${take}`)
       .catch(ErrorUtils.convertToEquosError);
   }
 
-  async stop(id: string): Promise<EquosSessionData> {
+  async stop(id: string): Promise<EquosSession> {
     return this.http
-      .patch<{}, EquosSessionData>(`/sessions/${id}/stop`, {})
+      .patch<{}, EquosSession>(`/sessions/${id}/stop`, {})
       .catch(ErrorUtils.convertToEquosError);
   }
 }
