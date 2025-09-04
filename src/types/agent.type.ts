@@ -52,6 +52,7 @@ export interface EquosAgentSTT {
 export interface EquosAgent {
   id: string;
   organizationId: string;
+  instruction: string;
   llm?: EquosAgentLLM;
   tts?: EquosAgentTTS;
   stt?: EquosAgentSTT;
