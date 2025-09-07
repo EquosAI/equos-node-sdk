@@ -7,6 +7,13 @@ export enum OpenaiRealtimeVoices {
   alloy = 'alloy',
   marin = 'marin',
   cedar = 'cedar',
+  ash = 'ash',
+  ballad = 'ballad',
+  coral = 'coral',
+  echo = 'echo',
+  sage = 'sage',
+  shimmer = 'shimmer',
+  verse = 'verse',
 }
 
 export enum GoogleRealtimeModels {
