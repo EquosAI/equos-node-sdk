@@ -20,4 +20,10 @@ export class EquosAvatarApi {
       .get<ListEquosAvatarsResponse>(`/avatars?skip=${skip}&take=${take}`)
       .catch(ErrorUtils.convertToEquosError);
   }
+
+  async get(avatarId: string): Promise<EquosAvatar | null> {
+    return this.http
+      .get<EquosAvatar | null>(`/avatars/${avatarId}`)
+      .catch(ErrorUtils.convertToEquosError);
+  }
 }

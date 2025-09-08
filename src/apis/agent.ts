@@ -20,4 +20,10 @@ export class EquosAgentApi {
       .get<ListEquosAgentsResponse>(`/agents?skip=${skip}&take=${take}`)
       .catch(ErrorUtils.convertToEquosError);
   }
+
+  async get(agentId: string): Promise<EquosAgent | null> {
+    return this.http
+      .get<EquosAgent | null>(`/agents/${agentId}`)
+      .catch(ErrorUtils.convertToEquosError);
+  }
 }
