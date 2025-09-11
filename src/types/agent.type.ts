@@ -50,8 +50,8 @@ export interface GeminiAgentConfig {
 
 export interface CreateEquosAgentRequest {
   instructions: string;
-
   provider: AgentProvider;
+  client?: string | null;
 
   config: OpenaiAgentConfig | GeminiAgentConfig;
 }
@@ -61,6 +61,7 @@ export interface EquosAgent {
   organizationId: string;
   instructions: string;
   provider: AgentProvider;
+  client?: string;
   config: OpenaiAgentConfig | GeminiAgentConfig;
   createdAt: Date;
   updatedAt: Date;

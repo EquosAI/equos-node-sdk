@@ -13,29 +13,71 @@ npm install @equos/node-sdk
 ```
 
 ## Usage
+
+### Setup Equos Client
 ```ts
 import { Equos } from '@equos/node-sdk';
 
-const MY_API_KEY = ''
+const  client = Equos.client(process.env.EQUOS_API_KEY!);
+```
 
-const  client = Equos.client(MY_API_KEY);
+You don't have an api key ? [Create one here](https://studio.equos.ai)
 
+### Create Avatar
+```ts
+import { EquosAvatar, CreateEquosAvatarRequest } from '@equos/node-sdk';
+
+
+const data: CreateEquosAvatarRequest = {
+  identity: "equos-avatar-jeremy",
+  name: "Jeremy"
+  refImage: "<base64 data url of the reference image>" // 5Mo max.
+}
 
 // Create an avatar.
-const referenceImageAsDataUrl: string = 'data:...';
-const avatar = await client.avatars.create('Equos Avatar', referenceImageAsDataUrl);
+const avatar: EquosAvatar = await client.avatars.create(data);
+
+```
+
+### Create Agent
+
+```ts
 console.log(avatar);
 
-// Start a session.
+import { 
+    EquosAgent, 
+    CreateEquosAgentRequest, 
+    AgentProvider, 
+    OpenaiRealtimeVoices, 
+    OpenaiRealtimeModels 
+} from '@equos/node-sdk';
 
-const sessionOptions = {
+
+const data: CreateEquosAgentRequest = {
+  instructions: "You are a Korean teacher..."
+  provider: AgentProvider.openai,
+  config: {
+    voice: OpenaiRealtimeVoices.ash,
+    model: OpenaiRealtimeModels.gpt_realtime
+  }
+}
+
+const agent: EquosAgent = await client.agents.create(data);
+```
+
+
+### Start a Session
+This will create and start a session. The avatar will join the room as soon as possible.
+
+```ts
+const sessionOptions: CreateEquosSessionRequest = {
     name: 'Equos Session',
     agent: {
-        instructions: 'You are a Korean teacher...'
-    },
+        id: "<your agent id>"
+    }, // agent accepts either an object with id of existing agent, or CreateEquosAgent object.
     avatar: {
-        id: avatar.id // or create one on the fly with referenceImage.
-    },
+        id: "<your avatar id>"
+    }, // avatar accepts either an object with id of existing avatar, or CreateEquosAvatar object.
     consumerIdentity: {
         identity: 'client-identity',
         name: 'Client Name'
@@ -46,5 +88,18 @@ const result = await client.sessions.create(sessionOptions);
 
 console.log(result.session);
 console.log(result.consumerAccessToken);
-
 ```
+
+### Stop a Session
+```ts
+const session = await client.sessions.stop("<session id>");
+```
+
+## Reach Us
+- Equos Slack Community: [Join Equos Community Slack](https://join.slack.com/t/equosaicommunity/shared_invite/zt-3d8oy19au-jZpsJB0i~gdL0jbDswdzzQ)
+- Support: [Support Form](https://docs.google.com/forms/d/e/1FAIpQLSdoK7LvORdQf7KOQKvhhlESStJcKc3bDB9HPsEet6LuOmVUfQ/viewform)
+
+## Documentation
+
+- Official Documentation: [https://docs.equos.ai](https://docs.equos.ai)
+- Equos NodeJS Usage Examples: [https://github.com/EquosAI/equos-examples/tree/main/examples/equos-nextjs-integration](https://github.com/EquosAI/equos-examples/tree/main/examples/equos-nextjs-integration)

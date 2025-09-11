@@ -4,6 +4,7 @@ export interface CreateEquosAvatarRequest {
   identity: string;
   name: string;
   refImage: string;
+  client?: string | null;
   agentId?: string;
   agent?: CreateEquosAgentRequest;
 }
@@ -13,6 +14,7 @@ export interface EquosAvatar {
   organizationId: string;
   identity: string;
   name: string;
+  client?: string;
   thumbnailUrl: string;
   createdAt: Date;
   updatedAt: Date;
