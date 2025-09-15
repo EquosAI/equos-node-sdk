@@ -15,9 +15,19 @@ export class EquosAvatarApi {
       .catch(ErrorUtils.convertToEquosError);
   }
 
-  async list(skip = 0, take = 10): Promise<ListEquosAvatarsResponse> {
+  async list(
+    skip = 0,
+    take = 10,
+    client?: string,
+  ): Promise<ListEquosAvatarsResponse> {
+    let path = `/avatars?skip=${skip}&take=${take}`;
+
+    if (client) {
+      path += `&client=${client}`;
+    }
+
     return this.http
-      .get<ListEquosAvatarsResponse>(`/avatars?skip=${skip}&take=${take}`)
+      .get<ListEquosAvatarsResponse>(path)
       .catch(ErrorUtils.convertToEquosError);
   }
 

@@ -27,9 +27,18 @@ export class EquosSessionApi {
       .catch(ErrorUtils.convertToEquosError);
   }
 
-  async list(skip = 0, take = 10): Promise<ListEquosSessionsResponse> {
+  async list(
+    skip = 0,
+    take = 10,
+    client?: string,
+  ): Promise<ListEquosSessionsResponse> {
+    let path = `/sessions?skip=${skip}&take=${take}`;
+
+    if (client) {
+      path += `&client=${client}`;
+    }
     return this.http
-      .get<ListEquosSessionsResponse>(`/sessions?skip=${skip}&take=${take}`)
+      .get<ListEquosSessionsResponse>(path)
       .catch(ErrorUtils.convertToEquosError);
   }
 

@@ -30,7 +30,7 @@ export interface EquosSession {
   host: {
     serverUrl: string;
   };
-  avatarId?: string;
+  avatarId: string;
   avatar: EquosAvatar;
   agentId?: string;
   agent?: EquosAgent;

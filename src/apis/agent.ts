@@ -15,9 +15,19 @@ export class EquosAgentApi {
       .catch(ErrorUtils.convertToEquosError);
   }
 
-  async list(skip = 0, take = 10): Promise<ListEquosAgentsResponse> {
+  async list(
+    skip = 0,
+    take = 10,
+    client?: string,
+  ): Promise<ListEquosAgentsResponse> {
+    let path = `/avatars?skip=${skip}&take=${take}`;
+
+    if (client) {
+      path += `&client=${client}`;
+    }
+
     return this.http
-      .get<ListEquosAgentsResponse>(`/agents?skip=${skip}&take=${take}`)
+      .get<ListEquosAgentsResponse>(path)
       .catch(ErrorUtils.convertToEquosError);
   }
 
