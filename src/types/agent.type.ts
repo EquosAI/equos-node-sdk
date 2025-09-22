@@ -57,6 +57,7 @@ export interface ElevenlabsAgentConfig {
 export interface CreateEquosAgentRequest {
   provider: AgentProvider;
   client?: string | null;
+  name?: string | null;
 
   config: OpenaiAgentConfig | GeminiAgentConfig | ElevenlabsAgentConfig;
 }
@@ -65,6 +66,7 @@ export interface EquosAgent {
   id: string;
   organizationId: string;
   provider: AgentProvider;
+  name?: string;
   client?: string;
   config: OpenaiAgentConfig | GeminiAgentConfig | ElevenlabsAgentConfig;
   createdAt: Date;
