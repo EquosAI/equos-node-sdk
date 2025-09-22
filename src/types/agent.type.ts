@@ -16,12 +16,12 @@ export enum OpenaiRealtimeVoices {
   verse = 'verse',
 }
 
-export enum GoogleRealtimeModels {
+export enum GeminiRealtimeModels {
   gemini_2_5_flash_exp = 'gemini-2.5-flash-exp-native-audio-thinking-dialog',
   gemini_2_0_flash_exp = 'gemini-2.0-flash-exp',
 }
 
-export enum GoogleRealtimeVoices {
+export enum GeminiRealtimeVoices {
   Puck = 'Puck',
   Charon = 'Charon',
   Kore = 'Kore',
@@ -46,8 +46,8 @@ export interface OpenaiAgentConfig {
 
 export interface GeminiAgentConfig {
   instructions: string;
-  model: GoogleRealtimeModels;
-  voice: GoogleRealtimeVoices;
+  model: GeminiRealtimeModels;
+  voice: GeminiRealtimeVoices;
 }
 
 export interface ElevenlabsAgentConfig {
