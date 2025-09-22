@@ -4,6 +4,7 @@ import {
   CreateEquosAgentRequest,
   EquosAgent,
   ListEquosAgentsResponse,
+  UpdateEquosAgentRequest,
 } from '../types/agent.type';
 
 export class EquosAgentApi {
@@ -34,6 +35,21 @@ export class EquosAgentApi {
   async get(agentId: string): Promise<EquosAgent | null> {
     return this.http
       .get<EquosAgent | null>(`/agents/${agentId}`)
+      .catch(ErrorUtils.convertToEquosError);
+  }
+
+  async delete(agentId: string): Promise<EquosAgent | null> {
+    return this.http
+      .delete<EquosAgent | null>(`/agents/${agentId}`)
+      .catch(ErrorUtils.convertToEquosError);
+  }
+
+  async update(
+    agentId: string,
+    data: UpdateEquosAgentRequest,
+  ): Promise<EquosAgent> {
+    return this.http
+      .put<CreateEquosAgentRequest, EquosAgent>(`/agents/${agentId}`, data)
       .catch(ErrorUtils.convertToEquosError);
   }
 }

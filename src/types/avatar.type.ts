@@ -1,12 +1,8 @@
-import { CreateEquosAgentRequest, EquosAgent } from './agent.type';
-
 export interface CreateEquosAvatarRequest {
   identity: string;
   name: string;
   refImage: string;
   client?: string | null;
-  agentId?: string;
-  agent?: CreateEquosAgentRequest;
 }
 
 export interface EquosAvatar {
@@ -18,9 +14,6 @@ export interface EquosAvatar {
   thumbnailUrl: string;
   createdAt: Date;
   updatedAt: Date;
-
-  agentId?: string;
-  agent?: EquosAgent;
 }
 
 export interface ListEquosAvatarsResponse {
@@ -28,4 +21,9 @@ export interface ListEquosAvatarsResponse {
   take: number;
   total: number;
   avatars: EquosAvatar[];
+}
+
+export interface UpdateEquosAvatarRequest extends CreateEquosAvatarRequest {
+  id: string;
+  organizationId: string;
 }

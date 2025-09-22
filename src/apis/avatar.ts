@@ -4,6 +4,7 @@ import {
   CreateEquosAvatarRequest,
   EquosAvatar,
   ListEquosAvatarsResponse,
+  UpdateEquosAvatarRequest,
 } from '../types/avatar.type';
 
 export class EquosAvatarApi {
@@ -34,6 +35,21 @@ export class EquosAvatarApi {
   async get(avatarId: string): Promise<EquosAvatar | null> {
     return this.http
       .get<EquosAvatar | null>(`/avatars/${avatarId}`)
+      .catch(ErrorUtils.convertToEquosError);
+  }
+
+  async delete(agentId: string): Promise<EquosAvatar | null> {
+    return this.http
+      .delete<EquosAvatar | null>(`/avatars/${agentId}`)
+      .catch(ErrorUtils.convertToEquosError);
+  }
+
+  async update(
+    agentId: string,
+    data: UpdateEquosAvatarRequest,
+  ): Promise<EquosAvatar> {
+    return this.http
+      .put<CreateEquosAvatarRequest, EquosAvatar>(`/avatars/${agentId}`, data)
       .catch(ErrorUtils.convertToEquosError);
   }
 }

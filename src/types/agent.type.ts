@@ -39,30 +39,34 @@ export enum AgentProvider {
 }
 
 export interface OpenaiAgentConfig {
+  instructions: string;
   model: OpenaiRealtimeModels;
   voice: OpenaiRealtimeVoices;
 }
 
 export interface GeminiAgentConfig {
+  instructions: string;
   model: GoogleRealtimeModels;
   voice: GoogleRealtimeVoices;
 }
 
+export interface ElevenlabsAgentConfig {
+  elevenlabsAgentId: string;
+}
+
 export interface CreateEquosAgentRequest {
-  instructions: string;
   provider: AgentProvider;
   client?: string | null;
 
-  config: OpenaiAgentConfig | GeminiAgentConfig;
+  config: OpenaiAgentConfig | GeminiAgentConfig | ElevenlabsAgentConfig;
 }
 
 export interface EquosAgent {
   id: string;
   organizationId: string;
-  instructions: string;
   provider: AgentProvider;
   client?: string;
-  config: OpenaiAgentConfig | GeminiAgentConfig;
+  config: OpenaiAgentConfig | GeminiAgentConfig | ElevenlabsAgentConfig;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -72,4 +76,9 @@ export interface ListEquosAgentsResponse {
   take: number;
   total: number;
   agents: EquosAgent[];
+}
+
+export interface UpdateEquosAgentRequest extends CreateEquosAgentRequest {
+  id: string;
+  organizationId: string;
 }

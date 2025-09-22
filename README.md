@@ -37,13 +37,12 @@ const data: CreateEquosAvatarRequest = {
 // Create an avatar.
 const avatar: EquosAvatar = await client.avatars.create(data);
 
+console.log(avatar);
 ```
 
 ### Create Agent
 
 ```ts
-console.log(avatar);
-
 import { 
     EquosAgent, 
     CreateEquosAgentRequest, 
@@ -63,6 +62,7 @@ const data: CreateEquosAgentRequest = {
 }
 
 const agent: EquosAgent = await client.agents.create(data);
+console.log(agent);
 ```
 
 

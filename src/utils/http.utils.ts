@@ -60,4 +60,36 @@ export class HttpUtils {
         throw e;
       });
   }
+
+  async put<T, U>(path: string, data: T): Promise<U> {
+    return axios
+      .put<U>(this.getPath(path), data, {
+        headers: {
+          'x-api-key': this.apiKey,
+        },
+      })
+      .then((response) => response.data)
+      .catch((e: unknown) => {
+        if (e instanceof AxiosError) {
+          throw e.response?.data || { message: e?.message, code: e?.code };
+        }
+        throw e;
+      });
+  }
+
+  async delete<U>(path: string): Promise<U> {
+    return axios
+      .delete<U>(this.getPath(path), {
+        headers: {
+          'x-api-key': this.apiKey,
+        },
+      })
+      .then((response) => response.data)
+      .catch((e: unknown) => {
+        if (e instanceof AxiosError) {
+          throw e.response?.data || { message: e?.message, code: e?.code };
+        }
+        throw e;
+      });
+  }
 }
