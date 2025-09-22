@@ -21,7 +21,7 @@ export class EquosAgentApi {
     take = 10,
     client?: string,
   ): Promise<ListEquosAgentsResponse> {
-    let path = `/avatars?skip=${skip}&take=${take}`;
+    let path = `/agents?skip=${skip}&take=${take}`;
 
     if (client) {
       path += `&client=${client}`;
