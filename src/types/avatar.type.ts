@@ -23,7 +23,8 @@ export interface ListEquosAvatarsResponse {
   avatars: EquosAvatar[];
 }
 
-export interface UpdateEquosAvatarRequest extends CreateEquosAvatarRequest {
+export interface UpdateEquosAvatarRequest
+  extends Omit<CreateEquosAvatarRequest, 'refImage'> {
   id: string;
   organizationId: string;
 }

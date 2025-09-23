@@ -49,7 +49,7 @@ export class EquosAvatarApi {
     data: UpdateEquosAvatarRequest,
   ): Promise<EquosAvatar> {
     return this.http
-      .put<CreateEquosAvatarRequest, EquosAvatar>(`/avatars/${agentId}`, data)
+      .put<UpdateEquosAvatarRequest, EquosAvatar>(`/avatars/${agentId}`, data)
       .catch(ErrorUtils.convertToEquosError);
   }
 }

@@ -49,7 +49,7 @@ export class EquosAgentApi {
     data: UpdateEquosAgentRequest,
   ): Promise<EquosAgent> {
     return this.http
-      .put<CreateEquosAgentRequest, EquosAgent>(`/agents/${agentId}`, data)
+      .put<UpdateEquosAgentRequest, EquosAgent>(`/agents/${agentId}`, data)
       .catch(ErrorUtils.convertToEquosError);
   }
 }
