@@ -53,9 +53,10 @@ import {
 
 
 const data: CreateEquosAgentRequest = {
-  instructions: "You are a Korean teacher..."
+  name: "My Agent",
   provider: AgentProvider.openai,
   config: {
+    instructions: "You are a Korean teacher...",
     voice: OpenaiRealtimeVoices.ash,
     model: OpenaiRealtimeModels.gpt_realtime
   }
