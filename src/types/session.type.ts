@@ -17,6 +17,7 @@ export interface CreateEquosSessionRequest {
   avatar: { id: string } | CreateEquosAvatarRequest;
   remoteAgentConnectingIdentity?: EquosParticipantIdentity;
   consumerIdentity?: EquosParticipantIdentity;
+  maxDuration: number;
 }
 
 export interface EquosSession {
