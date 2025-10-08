@@ -6,10 +6,17 @@
     "ai",
     "avatar",
     "livekit",
-    "pipecat",
     "sdk",
     "equos.ai",
-    "equos"
+    "equos",
+    "react",
+    "elevenlabs",
+    "realtime",
+    "agent",
+    "webrtc",
+    "browser",
+    "openai",
+    "gemini"
   ],
   "homepage": "https://github.com/EquosAI/equos-node-sdk#readme",
   "bugs": {

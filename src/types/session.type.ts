@@ -35,6 +35,7 @@ export interface EquosSession {
   avatar: EquosAvatar;
   agentId?: string;
   agent?: EquosAgent;
+  maxDuration?: number;
   startedAt: Date;
   endedAt?: Date;
   createdAt: Date;
