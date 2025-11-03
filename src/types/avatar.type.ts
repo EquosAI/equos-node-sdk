@@ -1,8 +1,11 @@
+import { EquosAgent } from './agent.type';
+
 export interface CreateEquosAvatarRequest {
   identity: string;
   name: string;
   refImage: string;
   client?: string | null;
+  agentId?: string | null;
 }
 
 export interface EquosAvatar {
@@ -12,6 +15,8 @@ export interface EquosAvatar {
   name: string;
   client?: string;
   thumbnailUrl: string;
+  agentId?: string;
+  agent?: EquosAgent | null;
   createdAt: Date;
   updatedAt: Date;
 }
