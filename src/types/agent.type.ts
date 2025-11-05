@@ -60,28 +60,20 @@ export enum AgentProvider {
   elevenlabs = 'elevenlabs',
 }
 
-export interface OpenaiAgentConfig {
-  instructions: string;
-  model: OpenaiRealtimeModels;
-  voice: OpenaiRealtimeVoices;
-}
-
-export interface GeminiAgentConfig {
-  instructions: string;
-  model: GeminiRealtimeModels;
-  voice: GeminiRealtimeVoices;
-}
-
-export interface ElevenlabsAgentConfig {
-  elevenlabsAgentId: string;
-}
-
 export interface CreateEquosAgentRequest {
   provider: AgentProvider;
   client?: string | null;
   name?: string | null;
 
-  config: OpenaiAgentConfig | GeminiAgentConfig | ElevenlabsAgentConfig;
+  model?: GeminiRealtimeModels;
+  voice?: GeminiRealtimeVoices;
+  instructions?: string;
+
+  search?: boolean;
+  emotions?: boolean;
+  memory?: boolean;
+
+  remoteId?: string | null;
 }
 
 export interface EquosAgent {
@@ -90,7 +82,17 @@ export interface EquosAgent {
   provider: AgentProvider;
   name?: string;
   client?: string;
-  config: OpenaiAgentConfig | GeminiAgentConfig | ElevenlabsAgentConfig;
+
+  model?: OpenaiRealtimeModels | GeminiRealtimeModels;
+  voice?: OpenaiRealtimeVoices | GeminiRealtimeVoices;
+  instructions?: string;
+
+  remoteId?: string;
+
+  search: boolean;
+  emotions: boolean;
+  memory: boolean;
+
   createdAt: Date;
   updatedAt: Date;
 }

@@ -1,4 +1,3 @@
-import axios, { AxiosError } from 'axios';
 import { EquosError } from '../types/error.type';
 
 export class ErrorUtils {
