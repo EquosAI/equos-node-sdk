@@ -18,6 +18,8 @@ export interface CreateEquosSessionRequest {
   remoteAgentConnectingIdentity?: EquosParticipantIdentity;
   consumerIdentity?: EquosParticipantIdentity;
   maxDuration?: number;
+  additionalCtx?: string;
+  templateVars?: Record<string, string>;
 }
 
 export interface EquosSession {
@@ -31,10 +33,18 @@ export interface EquosSession {
   host: {
     serverUrl: string;
   };
+
   avatarId: string;
   avatar: EquosAvatar;
+
   agentId?: string;
   agent?: EquosAgent;
+
+  additionalCtx?: string;
+  templateVars?: Record<string, string>;
+
+  remoteAgentIdentity?: string;
+
   maxDuration?: number;
   startedAt: Date;
   endedAt?: Date;
