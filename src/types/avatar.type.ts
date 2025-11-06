@@ -13,6 +13,7 @@ export interface EquosAvatar {
   organizationId: string;
   identity: string;
   name: string;
+  description: string;
   client?: string;
   thumbnailUrl: string;
   agentId?: string;
