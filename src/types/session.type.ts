@@ -46,6 +46,11 @@ export interface EquosSession {
   remoteAgentIdentity?: string;
 
   maxDuration?: number;
+
+  transcript?: {
+    transcription: { text: string; received_at: string; identity: string }[];
+  } | null;
+
   startedAt: Date;
   endedAt?: Date;
   createdAt: Date;
