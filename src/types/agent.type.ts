@@ -67,6 +67,7 @@ export interface CreateEquosAgentRequest {
   model?: GeminiRealtimeModels;
   voice?: GeminiRealtimeVoices;
   instructions?: string;
+  greetingMsg?: string | null;
 
   search?: boolean;
   emotions?: boolean;
@@ -85,6 +86,7 @@ export interface EquosAgent {
   model?: OpenaiRealtimeModels | GeminiRealtimeModels;
   voice?: OpenaiRealtimeVoices | GeminiRealtimeVoices;
   instructions?: string;
+  greetingMsg?: string | null;
 
   remoteId?: string;
 
