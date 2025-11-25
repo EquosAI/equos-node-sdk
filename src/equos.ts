@@ -1,5 +1,6 @@
 import { EquosAgentApi } from './apis/agent';
 import { EquosAvatarApi } from './apis/avatar';
+import { EquosKnowledgeBaseApi } from './apis/knowledge-base';
 import { EquosSessionApi } from './apis/session';
 import { ConstantsUtils } from './utils/constants.utils';
 import { HttpUtils } from './utils/http.utils';
@@ -22,6 +23,7 @@ export class Equos {
   private readonly avatarApi: EquosAvatarApi;
   private readonly sessionApi: EquosSessionApi;
   private readonly agentApi: EquosAgentApi;
+  private readonly knowledgeBaseApi: EquosKnowledgeBaseApi;
 
   private readonly version: string;
   private readonly endpoint: string;
@@ -38,6 +40,7 @@ export class Equos {
     this.avatarApi = new EquosAvatarApi(this.http);
     this.sessionApi = new EquosSessionApi(this.http);
     this.agentApi = new EquosAgentApi(this.http);
+    this.knowledgeBaseApi = new EquosKnowledgeBaseApi(this.http);
   }
 
   static client(apiKey: string, opts?: EquosOptions): Equos {
@@ -54,5 +57,9 @@ export class Equos {
 
   get sessions(): EquosSessionApi {
     return this.sessionApi;
+  }
+
+  get knowledgeBases(): EquosKnowledgeBaseApi {
+    return this.knowledgeBaseApi;
   }
 }
