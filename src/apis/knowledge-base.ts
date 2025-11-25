@@ -13,9 +13,7 @@ import {
 export class EquosKnowledgeBaseApi {
   constructor(private readonly http: HttpUtils) {}
 
-  async create(
-    data: CreateKnowledgeBaseRequest,
-  ): Promise<CreateKnowledgeBaseRequest> {
+  async create(data: CreateKnowledgeBaseRequest): Promise<EquosKnowledgeBase> {
     return this.http
       .post<
         CreateKnowledgeBaseRequest,
