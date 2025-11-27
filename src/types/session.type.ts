@@ -1,5 +1,6 @@
 import { CreateEquosAgentRequest, EquosAgent } from './agent.type';
 import { CreateEquosAvatarRequest, EquosAvatar } from './avatar.type';
+import { EquosKnowledgeBase } from './knowledge-base.type';
 
 export interface EquosParticipantIdentity {
   identity: string;
@@ -15,6 +16,7 @@ export interface CreateEquosSessionRequest {
   };
   agent?: { id: string } | CreateEquosAgentRequest;
   avatar: { id: string } | CreateEquosAvatarRequest;
+  knowledgeBase?: { id: string };
   remoteAgentConnectingIdentity?: EquosParticipantIdentity;
   consumerIdentity?: EquosParticipantIdentity;
   maxDuration?: number;
@@ -39,6 +41,9 @@ export interface EquosSession {
 
   agentId?: string;
   agent?: EquosAgent;
+
+  knowledgeBaseId?: string;
+  knowledgeBase?: EquosKnowledgeBase;
 
   additionalCtx?: string;
   templateVars?: Record<string, string>;
