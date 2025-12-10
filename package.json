@@ -1,6 +1,6 @@
 {
   "name": "@equos/node-sdk",
-  "version": "2.2.3",
+  "version": "3.0.0",
   "description": "Equos.ai node.js official SDK.",
   "keywords": [
     "ai",
