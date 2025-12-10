@@ -28,22 +28,22 @@ import {
     ListEquosBrainsResponseToJSON,
 } from '../models/index';
 
-export interface BrainControllerCreateV3Request {
+export interface CreateBrainRequest {
     createEquosBrainRequest: CreateEquosBrainRequest;
 }
 
-export interface BrainControllerGetByIdV3Request {
+export interface DeleteBrainRequest {
     id: string;
 }
 
-export interface BrainControllerListV3Request {
+export interface GetBrainRequest {
+    id: string;
+}
+
+export interface ListBrainsRequest {
     take?: number;
     skip?: number;
     client?: string;
-}
-
-export interface BrainControllerSoftDeleteV3Request {
-    id: string;
 }
 
 /**
@@ -54,11 +54,11 @@ export class BrainApi extends runtime.BaseAPI {
     /**
      * Create a new Equos Brain.
      */
-    async brainControllerCreateV3Raw(requestParameters: BrainControllerCreateV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosBrain>> {
+    async createBrainRaw(requestParameters: CreateBrainRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosBrain>> {
         if (requestParameters['createEquosBrainRequest'] == null) {
             throw new runtime.RequiredError(
                 'createEquosBrainRequest',
-                'Required parameter "createEquosBrainRequest" was null or undefined when calling brainControllerCreateV3().'
+                'Required parameter "createEquosBrainRequest" was null or undefined when calling createBrain().'
             );
         }
 
@@ -89,19 +89,60 @@ export class BrainApi extends runtime.BaseAPI {
     /**
      * Create a new Equos Brain.
      */
-    async brainControllerCreateV3(requestParameters: BrainControllerCreateV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosBrain> {
-        const response = await this.brainControllerCreateV3Raw(requestParameters, initOverrides);
+    async createBrain(requestParameters: CreateBrainRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosBrain> {
+        const response = await this.createBrainRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Delete an Equos Brain. This action is irreversible.
+     */
+    async deleteBrainRaw(requestParameters: DeleteBrainRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosBrain>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling deleteBrain().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["x-api-key"] = await this.configuration.apiKey("x-api-key"); // x-api-key authentication
+        }
+
+
+        let urlPath = `/v3/brains/{id}`;
+        urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => EquosBrainFromJSON(jsonValue));
+    }
+
+    /**
+     * Delete an Equos Brain. This action is irreversible.
+     */
+    async deleteBrain(requestParameters: DeleteBrainRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosBrain> {
+        const response = await this.deleteBrainRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Equos Brain by ID.
      */
-    async brainControllerGetByIdV3Raw(requestParameters: BrainControllerGetByIdV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosBrain>> {
+    async getBrainRaw(requestParameters: GetBrainRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosBrain>> {
         if (requestParameters['id'] == null) {
             throw new runtime.RequiredError(
                 'id',
-                'Required parameter "id" was null or undefined when calling brainControllerGetByIdV3().'
+                'Required parameter "id" was null or undefined when calling getBrain().'
             );
         }
 
@@ -130,15 +171,15 @@ export class BrainApi extends runtime.BaseAPI {
     /**
      * Get Equos Brain by ID.
      */
-    async brainControllerGetByIdV3(requestParameters: BrainControllerGetByIdV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosBrain> {
-        const response = await this.brainControllerGetByIdV3Raw(requestParameters, initOverrides);
+    async getBrain(requestParameters: GetBrainRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosBrain> {
+        const response = await this.getBrainRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Equos Brains.
      */
-    async brainControllerListV3Raw(requestParameters: BrainControllerListV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListEquosBrainsResponse>> {
+    async listBrainsRaw(requestParameters: ListBrainsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListEquosBrainsResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['take'] != null) {
@@ -175,49 +216,8 @@ export class BrainApi extends runtime.BaseAPI {
     /**
      * List Equos Brains.
      */
-    async brainControllerListV3(requestParameters: BrainControllerListV3Request = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListEquosBrainsResponse> {
-        const response = await this.brainControllerListV3Raw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Delete an Equos Brain. This action is irreversible.
-     */
-    async brainControllerSoftDeleteV3Raw(requestParameters: BrainControllerSoftDeleteV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosBrain>> {
-        if (requestParameters['id'] == null) {
-            throw new runtime.RequiredError(
-                'id',
-                'Required parameter "id" was null or undefined when calling brainControllerSoftDeleteV3().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["x-api-key"] = await this.configuration.apiKey("x-api-key"); // x-api-key authentication
-        }
-
-
-        let urlPath = `/v3/brains/{id}`;
-        urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
-
-        const response = await this.request({
-            path: urlPath,
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => EquosBrainFromJSON(jsonValue));
-    }
-
-    /**
-     * Delete an Equos Brain. This action is irreversible.
-     */
-    async brainControllerSoftDeleteV3(requestParameters: BrainControllerSoftDeleteV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosBrain> {
-        const response = await this.brainControllerSoftDeleteV3Raw(requestParameters, initOverrides);
+    async listBrains(requestParameters: ListBrainsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListEquosBrainsResponse> {
+        const response = await this.listBrainsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

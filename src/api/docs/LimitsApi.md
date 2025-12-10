@@ -4,13 +4,13 @@ All URIs are relative to *http://localhost:3001*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**limitsControllerLimitV3**](LimitsApi.md#limitscontrollerlimitv3) | **GET** /v3/limits | Get organization limits. |
+| [**getLimit**](LimitsApi.md#getlimit) | **GET** /v3/limits | Get organization limits. |
 
 
 
-## limitsControllerLimitV3
+## getLimit
 
-> EquosLimitResponse limitsControllerLimitV3()
+> EquosLimitResponse getLimit()
 
 Get organization limits.
 
@@ -21,7 +21,7 @@ import {
   Configuration,
   LimitsApi,
 } from '';
-import type { LimitsControllerLimitV3Request } from '';
+import type { GetLimitRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
@@ -32,7 +32,7 @@ async function example() {
   const api = new LimitsApi(config);
 
   try {
-    const data = await api.limitsControllerLimitV3();
+    const data = await api.getLimit();
     console.log(data);
   } catch (error) {
     console.error(error);

@@ -28,22 +28,22 @@ import {
     ListEquosFacesResponseToJSON,
 } from '../models/index';
 
-export interface FaceControllerCreateV3Request {
+export interface CreateFaceRequest {
     createEquosFaceRequest: CreateEquosFaceRequest;
 }
 
-export interface FaceControllerGetByIdV3Request {
+export interface DeleteFaceRequest {
     id: string;
 }
 
-export interface FaceControllerListV3Request {
+export interface GetFaceRequest {
+    id: string;
+}
+
+export interface ListFacesRequest {
     take?: number;
     skip?: number;
     client?: string;
-}
-
-export interface FaceControllerSoftDeleteV3Request {
-    id: string;
 }
 
 /**
@@ -54,11 +54,11 @@ export class FaceApi extends runtime.BaseAPI {
     /**
      * Create a new Equos Face.
      */
-    async faceControllerCreateV3Raw(requestParameters: FaceControllerCreateV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosFace>> {
+    async createFaceRaw(requestParameters: CreateFaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosFace>> {
         if (requestParameters['createEquosFaceRequest'] == null) {
             throw new runtime.RequiredError(
                 'createEquosFaceRequest',
-                'Required parameter "createEquosFaceRequest" was null or undefined when calling faceControllerCreateV3().'
+                'Required parameter "createEquosFaceRequest" was null or undefined when calling createFace().'
             );
         }
 
@@ -89,19 +89,60 @@ export class FaceApi extends runtime.BaseAPI {
     /**
      * Create a new Equos Face.
      */
-    async faceControllerCreateV3(requestParameters: FaceControllerCreateV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosFace> {
-        const response = await this.faceControllerCreateV3Raw(requestParameters, initOverrides);
+    async createFace(requestParameters: CreateFaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosFace> {
+        const response = await this.createFaceRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Delete an Equos Face. This action is irreversible.
+     */
+    async deleteFaceRaw(requestParameters: DeleteFaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosFace>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling deleteFace().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["x-api-key"] = await this.configuration.apiKey("x-api-key"); // x-api-key authentication
+        }
+
+
+        let urlPath = `/v3/faces/{id}`;
+        urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => EquosFaceFromJSON(jsonValue));
+    }
+
+    /**
+     * Delete an Equos Face. This action is irreversible.
+     */
+    async deleteFace(requestParameters: DeleteFaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosFace> {
+        const response = await this.deleteFaceRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Equos Face by ID.
      */
-    async faceControllerGetByIdV3Raw(requestParameters: FaceControllerGetByIdV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosFace>> {
+    async getFaceRaw(requestParameters: GetFaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosFace>> {
         if (requestParameters['id'] == null) {
             throw new runtime.RequiredError(
                 'id',
-                'Required parameter "id" was null or undefined when calling faceControllerGetByIdV3().'
+                'Required parameter "id" was null or undefined when calling getFace().'
             );
         }
 
@@ -130,15 +171,15 @@ export class FaceApi extends runtime.BaseAPI {
     /**
      * Get Equos Face by ID.
      */
-    async faceControllerGetByIdV3(requestParameters: FaceControllerGetByIdV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosFace> {
-        const response = await this.faceControllerGetByIdV3Raw(requestParameters, initOverrides);
+    async getFace(requestParameters: GetFaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosFace> {
+        const response = await this.getFaceRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Equos Faces.
      */
-    async faceControllerListV3Raw(requestParameters: FaceControllerListV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListEquosFacesResponse>> {
+    async listFacesRaw(requestParameters: ListFacesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListEquosFacesResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['take'] != null) {
@@ -175,49 +216,8 @@ export class FaceApi extends runtime.BaseAPI {
     /**
      * List Equos Faces.
      */
-    async faceControllerListV3(requestParameters: FaceControllerListV3Request = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListEquosFacesResponse> {
-        const response = await this.faceControllerListV3Raw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Delete an Equos Face. This action is irreversible.
-     */
-    async faceControllerSoftDeleteV3Raw(requestParameters: FaceControllerSoftDeleteV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosFace>> {
-        if (requestParameters['id'] == null) {
-            throw new runtime.RequiredError(
-                'id',
-                'Required parameter "id" was null or undefined when calling faceControllerSoftDeleteV3().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["x-api-key"] = await this.configuration.apiKey("x-api-key"); // x-api-key authentication
-        }
-
-
-        let urlPath = `/v3/faces/{id}`;
-        urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
-
-        const response = await this.request({
-            path: urlPath,
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => EquosFaceFromJSON(jsonValue));
-    }
-
-    /**
-     * Delete an Equos Face. This action is irreversible.
-     */
-    async faceControllerSoftDeleteV3(requestParameters: FaceControllerSoftDeleteV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosFace> {
-        const response = await this.faceControllerSoftDeleteV3Raw(requestParameters, initOverrides);
+    async listFaces(requestParameters: ListFacesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListEquosFacesResponse> {
+        const response = await this.listFacesRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

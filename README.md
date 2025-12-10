@@ -31,7 +31,7 @@ import { EquosClient } from '@equos/node-sdk';
 const client = EquosClient.create(process.env.EQUOS_API_KEY!);
 
 // List all characters
-const characters = await client.characters.characterControllerListV3({
+const characters = await client.characters.listCharacters({
   take: 10,
   skip: 0,
 });
@@ -71,10 +71,9 @@ const characterData: CreateEquosCharacterRequest = {
   search: false, // Enable web search
 };
 
-const character: EquosCharacter =
-  await client.characters.characterControllerCreateV3({
-    createEquosCharacterRequest: characterData,
-  });
+const character: EquosCharacter = await client.characters.createCharacter({
+  createEquosCharacterRequest: characterData,
+});
 
 console.log('Created character:', character.id);
 ```
@@ -82,7 +81,7 @@ console.log('Created character:', character.id);
 #### List Characters
 
 ```typescript
-const response = await client.characters.characterControllerListV3({
+const response = await client.characters.listCharacters({
   take: 20, // Number of items to return (max 50)
   skip: 0, // Number of items to skip
   client: 'my-app', // Optional: filter by client identifier
@@ -97,7 +96,7 @@ response.characters.forEach((char) => {
 #### Get Character by ID
 
 ```typescript
-const character = await client.characters.characterControllerGetByIdV3({
+const character = await client.characters.getCharacter({
   id: 'character-id',
 });
 
@@ -116,7 +115,7 @@ const updates: UpdateEquosCharacterRequest = {
   brainId: 'new-brain-id',
 };
 
-const updated = await client.characters.characterControllerUpdateV3({
+const updated = await client.characters.updateCharacter({
   id: 'character-id',
   updateEquosCharacterRequest: updates,
 });
@@ -125,7 +124,7 @@ const updated = await client.characters.characterControllerUpdateV3({
 #### Delete a Character
 
 ```typescript
-const deleted = await client.characters.characterControllerSoftDeleteV3({
+const deleted = await client.characters.deleteCharacter({
   id: 'character-id',
 });
 ```
@@ -144,7 +143,7 @@ const faceData: CreateEquosFaceRequest = {
   client: 'my-app', // Optional: client identifier
 };
 
-const face = await client.faces.faceControllerCreateV3({
+const face = await client.faces.createFace({
   createEquosFaceRequest: faceData,
 });
 
@@ -155,7 +154,7 @@ console.log('Status:', face.status); // 'processing', 'ready', or 'error'
 #### List Faces
 
 ```typescript
-const faces = await client.faces.faceControllerListV3({
+const faces = await client.faces.listFaces({
   take: 10,
   skip: 0,
 });
@@ -171,7 +170,7 @@ faces.faces.forEach((face) => {
 #### Get Face by ID
 
 ```typescript
-const face = await client.faces.faceControllerGetByIdV3({
+const face = await client.faces.getFace({
   id: 'face-id',
 });
 ```
@@ -179,7 +178,7 @@ const face = await client.faces.faceControllerGetByIdV3({
 #### Delete a Face
 
 ```typescript
-await client.faces.faceControllerSoftDeleteV3({
+await client.faces.deleteFace({
   id: 'face-id',
 });
 ```
@@ -201,7 +200,7 @@ const voiceData: CreateEquosVoiceRequest = {
   client: 'my-app', // Optional
 };
 
-const voice = await client.voices.voiceControllerCreateV3({
+const voice = await client.voices.createVoice({
   createEquosVoiceRequest: voiceData,
 });
 ```
@@ -209,7 +208,7 @@ const voice = await client.voices.voiceControllerCreateV3({
 #### List Voices
 
 ```typescript
-const voices = await client.voices.voiceControllerListV3({
+const voices = await client.voices.listVoices({
   take: 10,
   skip: 0,
 });
@@ -218,7 +217,7 @@ const voices = await client.voices.voiceControllerListV3({
 #### Get Voice by ID
 
 ```typescript
-const voice = await client.voices.voiceControllerGetByIdV3({
+const voice = await client.voices.getVoice({
   id: 'voice-id',
 });
 ```
@@ -226,7 +225,7 @@ const voice = await client.voices.voiceControllerGetByIdV3({
 #### Delete a Voice
 
 ```typescript
-await client.voices.voiceControllerSoftDeleteV3({
+await client.voices.deleteVoice({
   id: 'voice-id',
 });
 ```
@@ -249,7 +248,7 @@ const brainData: CreateEquosBrainRequest = {
   client: 'my-app', // Optional
 };
 
-const brain = await client.brains.brainControllerCreateV3({
+const brain = await client.brains.createBrain({
   createEquosBrainRequest: brainData,
 });
 ```
@@ -257,7 +256,7 @@ const brain = await client.brains.brainControllerCreateV3({
 #### List Brains
 
 ```typescript
-const brains = await client.brains.brainControllerListV3({
+const brains = await client.brains.listBrains({
   take: 10,
   skip: 0,
 });
@@ -266,7 +265,7 @@ const brains = await client.brains.brainControllerListV3({
 #### Get Brain by ID
 
 ```typescript
-const brain = await client.brains.brainControllerGetByIdV3({
+const brain = await client.brains.getBrain({
   id: 'brain-id',
 });
 
@@ -277,7 +276,7 @@ console.log('Greeting:', brain.greetingMessage);
 #### Delete a Brain
 
 ```typescript
-await client.brains.brainControllerSoftDeleteV3({
+await client.brains.deleteBrain({
   id: 'brain-id',
 });
 ```
@@ -287,7 +286,7 @@ await client.brains.brainControllerSoftDeleteV3({
 #### Check API Health
 
 ```typescript
-const health = await client.health.healthControllerCheckV3();
+const health = await client.health.checkHealth();
 console.log('Status:', health.status);
 console.log('Version:', health.version);
 ```
@@ -295,7 +294,7 @@ console.log('Version:', health.version);
 #### Get Organization Limits
 
 ```typescript
-const limits = await client.limits.limitsControllerLimitV3();
+const limits = await client.limits.getLimit();
 
 if (limits) {
   console.log('Concurrent sessions:', limits.concurrent);
@@ -316,14 +315,14 @@ async function main() {
   const client = EquosClient.create(process.env.EQUOS_API_KEY!);
 
   // Create a face
-  const face = await client.faces.faceControllerCreateV3({
+  const face = await client.faces.createFace({
     createEquosFaceRequest: {
       identity: 'byron',
     },
   });
 
   // Create a voice
-  const voice = await client.voices.voiceControllerCreateV3({
+  const voice = await client.voices.createVoice({
     createEquosVoiceRequest: {
       name: 'Professional Voice',
       description: 'Clear professional tone',
@@ -333,7 +332,7 @@ async function main() {
   });
 
   // Create a brain
-  const brain = await client.brains.brainControllerCreateV3({
+  const brain = await client.brains.createBrain({
     createEquosBrainRequest: {
       name: 'Support Agent',
       instructions: 'You are a helpful support agent.',
@@ -343,7 +342,7 @@ async function main() {
   });
 
   // Create a character with all components
-  const character = await client.characters.characterControllerCreateV3({
+  const character = await client.characters.createCharacter({
     createEquosCharacterRequest: {
       name: 'AI Support Agent',
       livekitIdentity: 'support-agent-001',
@@ -367,7 +366,7 @@ main().catch(console.error);
 
 ```typescript
 try {
-  const character = await client.characters.characterControllerGetByIdV3({
+  const character = await client.characters.getCharacter({
     id: 'non-existent-id',
   });
 } catch (error) {

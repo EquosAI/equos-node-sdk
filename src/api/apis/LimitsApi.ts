@@ -30,7 +30,7 @@ export class LimitsApi extends runtime.BaseAPI {
     /**
      * Get organization limits.
      */
-    async limitsControllerLimitV3Raw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosLimitResponse>> {
+    async getLimitRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosLimitResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -55,8 +55,8 @@ export class LimitsApi extends runtime.BaseAPI {
     /**
      * Get organization limits.
      */
-    async limitsControllerLimitV3(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosLimitResponse> {
-        const response = await this.limitsControllerLimitV3Raw(initOverrides);
+    async getLimit(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosLimitResponse> {
+        const response = await this.getLimitRaw(initOverrides);
         return await response.value();
     }
 

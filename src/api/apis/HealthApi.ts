@@ -30,7 +30,7 @@ export class HealthApi extends runtime.BaseAPI {
     /**
      * Health check endpoint
      */
-    async healthControllerCheckV3Raw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<HealthResponse>> {
+    async healthCheckRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<HealthResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -51,8 +51,8 @@ export class HealthApi extends runtime.BaseAPI {
     /**
      * Health check endpoint
      */
-    async healthControllerCheckV3(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<HealthResponse> {
-        const response = await this.healthControllerCheckV3Raw(initOverrides);
+    async healthCheck(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<HealthResponse> {
+        const response = await this.healthCheckRaw(initOverrides);
         return await response.value();
     }
 

@@ -14,6 +14,8 @@ docs/AgentApi.md
 docs/AvatarApi.md
 docs/BrainApi.md
 docs/CharacterApi.md
+docs/CreateDocumentRequest.md
+docs/CreateDocumentResponse.md
 docs/CreateEquosAgentRequest.md
 docs/CreateEquosAvatarRequest.md
 docs/CreateEquosBrainRequest.md
@@ -24,6 +26,7 @@ docs/CreateEquosSessionRequestAgent.md
 docs/CreateEquosSessionRequestAvatar.md
 docs/CreateEquosSessionResponse.md
 docs/CreateEquosVoiceRequest.md
+docs/CreateKnowledgeBaseRequest.md
 docs/CreateSessionPassRequest.md
 docs/EquosAgent.md
 docs/EquosAvatar.md
@@ -49,6 +52,7 @@ docs/ListEquosAvatarsResponse.md
 docs/ListEquosBrainsResponse.md
 docs/ListEquosCharactersResponse.md
 docs/ListEquosFacesResponse.md
+docs/ListEquosKnowledgeBasesResponse.md
 docs/ListEquosSessionsResponse.md
 docs/ListEquosVoicesResponse.md
 docs/SessionPassesApi.md
@@ -58,6 +62,8 @@ docs/UpdateEquosAvatarRequest.md
 docs/UpdateEquosCharacterRequest.md
 docs/VoiceApi.md
 index.ts
+models/CreateDocumentRequest.ts
+models/CreateDocumentResponse.ts
 models/CreateEquosAgentRequest.ts
 models/CreateEquosAvatarRequest.ts
 models/CreateEquosBrainRequest.ts
@@ -68,6 +74,7 @@ models/CreateEquosSessionRequestAgent.ts
 models/CreateEquosSessionRequestAvatar.ts
 models/CreateEquosSessionResponse.ts
 models/CreateEquosVoiceRequest.ts
+models/CreateKnowledgeBaseRequest.ts
 models/CreateSessionPassRequest.ts
 models/EquosAgent.ts
 models/EquosAvatar.ts
@@ -89,6 +96,7 @@ models/ListEquosAvatarsResponse.ts
 models/ListEquosBrainsResponse.ts
 models/ListEquosCharactersResponse.ts
 models/ListEquosFacesResponse.ts
+models/ListEquosKnowledgeBasesResponse.ts
 models/ListEquosSessionsResponse.ts
 models/ListEquosVoicesResponse.ts
 models/UpdateEquosAgentRequest.ts

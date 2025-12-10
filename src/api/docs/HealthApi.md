@@ -4,13 +4,13 @@ All URIs are relative to *http://localhost:3001*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**healthControllerCheckV3**](HealthApi.md#healthcontrollercheckv3) | **GET** /v3/health | Health check endpoint |
+| [**healthCheck**](HealthApi.md#healthcheck) | **GET** /v3/health | Health check endpoint |
 
 
 
-## healthControllerCheckV3
+## healthCheck
 
-> HealthResponse healthControllerCheckV3()
+> HealthResponse healthCheck()
 
 Health check endpoint
 
@@ -21,14 +21,14 @@ import {
   Configuration,
   HealthApi,
 } from '';
-import type { HealthControllerCheckV3Request } from '';
+import type { HealthCheckRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
   const api = new HealthApi();
 
   try {
-    const data = await api.healthControllerCheckV3();
+    const data = await api.healthCheck();
     console.log(data);
   } catch (error) {
     console.error(error);

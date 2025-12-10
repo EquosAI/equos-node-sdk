@@ -4,16 +4,16 @@ All URIs are relative to *http://localhost:3001*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**brainControllerCreateV3**](BrainApi.md#braincontrollercreatev3) | **POST** /v3/brains | Create a new Equos Brain. |
-| [**brainControllerGetByIdV3**](BrainApi.md#braincontrollergetbyidv3) | **GET** /v3/brains/{id} | Get Equos Brain by ID. |
-| [**brainControllerListV3**](BrainApi.md#braincontrollerlistv3) | **GET** /v3/brains | List Equos Brains. |
-| [**brainControllerSoftDeleteV3**](BrainApi.md#braincontrollersoftdeletev3) | **DELETE** /v3/brains/{id} | Delete an Equos Brain. This action is irreversible. |
+| [**createBrain**](BrainApi.md#createbrain) | **POST** /v3/brains | Create a new Equos Brain. |
+| [**deleteBrain**](BrainApi.md#deletebrain) | **DELETE** /v3/brains/{id} | Delete an Equos Brain. This action is irreversible. |
+| [**getBrain**](BrainApi.md#getbrain) | **GET** /v3/brains/{id} | Get Equos Brain by ID. |
+| [**listBrains**](BrainApi.md#listbrains) | **GET** /v3/brains | List Equos Brains. |
 
 
 
-## brainControllerCreateV3
+## createBrain
 
-> EquosBrain brainControllerCreateV3(createEquosBrainRequest)
+> EquosBrain createBrain(createEquosBrainRequest)
 
 Create a new Equos Brain.
 
@@ -24,7 +24,7 @@ import {
   Configuration,
   BrainApi,
 } from '';
-import type { BrainControllerCreateV3Request } from '';
+import type { CreateBrainRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
@@ -37,10 +37,10 @@ async function example() {
   const body = {
     // CreateEquosBrainRequest
     createEquosBrainRequest: ...,
-  } satisfies BrainControllerCreateV3Request;
+  } satisfies CreateBrainRequest;
 
   try {
-    const data = await api.brainControllerCreateV3(body);
+    const data = await api.createBrain(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -80,11 +80,11 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
-## brainControllerGetByIdV3
+## deleteBrain
 
-> EquosBrain brainControllerGetByIdV3(id)
+> EquosBrain deleteBrain(id)
 
-Get Equos Brain by ID.
+Delete an Equos Brain. This action is irreversible.
 
 ### Example
 
@@ -93,7 +93,7 @@ import {
   Configuration,
   BrainApi,
 } from '';
-import type { BrainControllerGetByIdV3Request } from '';
+import type { DeleteBrainRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
@@ -106,10 +106,10 @@ async function example() {
   const body = {
     // string | Equos Brain ID
     id: id_example,
-  } satisfies BrainControllerGetByIdV3Request;
+  } satisfies DeleteBrainRequest;
 
   try {
-    const data = await api.brainControllerGetByIdV3(body);
+    const data = await api.deleteBrain(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -149,9 +149,78 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
-## brainControllerListV3
+## getBrain
 
-> ListEquosBrainsResponse brainControllerListV3(take, skip, client)
+> EquosBrain getBrain(id)
+
+Get Equos Brain by ID.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  BrainApi,
+} from '';
+import type { GetBrainRequest } from '';
+
+async function example() {
+  console.log("🚀 Testing  SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: x-api-key
+    apiKey: "YOUR API KEY",
+  });
+  const api = new BrainApi(config);
+
+  const body = {
+    // string | Equos Brain ID
+    id: id_example,
+  } satisfies GetBrainRequest;
+
+  try {
+    const data = await api.getBrain(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `string` | Equos Brain ID | [Defaults to `undefined`] |
+
+### Return type
+
+[**EquosBrain**](EquosBrain.md)
+
+### Authorization
+
+[x-api-key](../README.md#x-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## listBrains
+
+> ListEquosBrainsResponse listBrains(take, skip, client)
 
 List Equos Brains.
 
@@ -162,7 +231,7 @@ import {
   Configuration,
   BrainApi,
 } from '';
-import type { BrainControllerListV3Request } from '';
+import type { ListBrainsRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
@@ -179,10 +248,10 @@ async function example() {
     skip: 8.14,
     // string (optional)
     client: client_example,
-  } satisfies BrainControllerListV3Request;
+  } satisfies ListBrainsRequest;
 
   try {
-    const data = await api.brainControllerListV3(body);
+    const data = await api.listBrains(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -205,75 +274,6 @@ example().catch(console.error);
 ### Return type
 
 [**ListEquosBrainsResponse**](ListEquosBrainsResponse.md)
-
-### Authorization
-
-[x-api-key](../README.md#x-api-key)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
-
-
-## brainControllerSoftDeleteV3
-
-> EquosBrain brainControllerSoftDeleteV3(id)
-
-Delete an Equos Brain. This action is irreversible.
-
-### Example
-
-```ts
-import {
-  Configuration,
-  BrainApi,
-} from '';
-import type { BrainControllerSoftDeleteV3Request } from '';
-
-async function example() {
-  console.log("🚀 Testing  SDK...");
-  const config = new Configuration({ 
-    // To configure API key authorization: x-api-key
-    apiKey: "YOUR API KEY",
-  });
-  const api = new BrainApi(config);
-
-  const body = {
-    // string | Equos Brain ID
-    id: id_example,
-  } satisfies BrainControllerSoftDeleteV3Request;
-
-  try {
-    const data = await api.brainControllerSoftDeleteV3(body);
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// Run the test
-example().catch(console.error);
-```
-
-### Parameters
-
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Equos Brain ID | [Defaults to `undefined`] |
-
-### Return type
-
-[**EquosBrain**](EquosBrain.md)
 
 ### Authorization
 

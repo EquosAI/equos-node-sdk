@@ -1,5 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
+export * from './CreateDocumentRequest';
+export * from './CreateDocumentResponse';
 export * from './CreateEquosAgentRequest';
 export * from './CreateEquosAvatarRequest';
 export * from './CreateEquosBrainRequest';
@@ -10,6 +12,7 @@ export * from './CreateEquosSessionRequestAgent';
 export * from './CreateEquosSessionRequestAvatar';
 export * from './CreateEquosSessionResponse';
 export * from './CreateEquosVoiceRequest';
+export * from './CreateKnowledgeBaseRequest';
 export * from './CreateSessionPassRequest';
 export * from './EquosAgent';
 export * from './EquosAvatar';
@@ -31,6 +34,7 @@ export * from './ListEquosAvatarsResponse';
 export * from './ListEquosBrainsResponse';
 export * from './ListEquosCharactersResponse';
 export * from './ListEquosFacesResponse';
+export * from './ListEquosKnowledgeBasesResponse';
 export * from './ListEquosSessionsResponse';
 export * from './ListEquosVoicesResponse';
 export * from './UpdateEquosAgentRequest';

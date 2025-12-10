@@ -4,17 +4,17 @@ All URIs are relative to *http://localhost:3001*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**characterControllerCreateV3**](CharacterApi.md#charactercontrollercreatev3) | **POST** /v3/characters | Create a new Equos Character. |
-| [**characterControllerGetByIdV3**](CharacterApi.md#charactercontrollergetbyidv3) | **GET** /v3/characters/{id} | Get Equos Character by ID. |
-| [**characterControllerListV3**](CharacterApi.md#charactercontrollerlistv3) | **GET** /v3/characters | List Equos Characters. |
-| [**characterControllerSoftDeleteV3**](CharacterApi.md#charactercontrollersoftdeletev3) | **DELETE** /v3/characters/{id} | Delete an Equos Character. This action is irreversible. |
-| [**characterControllerUpdateV3**](CharacterApi.md#charactercontrollerupdatev3) | **PUT** /v3/characters/{id} | Update character properties. |
+| [**createCharacter**](CharacterApi.md#createcharacter) | **POST** /v3/characters | Create a new Equos Character. |
+| [**deleteCharacter**](CharacterApi.md#deletecharacter) | **DELETE** /v3/characters/{id} | Delete an Equos Character. This action is irreversible. |
+| [**getCharacter**](CharacterApi.md#getcharacter) | **GET** /v3/characters/{id} | Get Equos Character by ID. |
+| [**listCharacters**](CharacterApi.md#listcharacters) | **GET** /v3/characters | List Equos Characters. |
+| [**updateCharacter**](CharacterApi.md#updatecharacter) | **PUT** /v3/characters/{id} | Update character properties. |
 
 
 
-## characterControllerCreateV3
+## createCharacter
 
-> EquosCharacter characterControllerCreateV3(createEquosCharacterRequest)
+> EquosCharacter createCharacter(createEquosCharacterRequest)
 
 Create a new Equos Character.
 
@@ -25,7 +25,7 @@ import {
   Configuration,
   CharacterApi,
 } from '';
-import type { CharacterControllerCreateV3Request } from '';
+import type { CreateCharacterRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
@@ -38,10 +38,10 @@ async function example() {
   const body = {
     // CreateEquosCharacterRequest
     createEquosCharacterRequest: ...,
-  } satisfies CharacterControllerCreateV3Request;
+  } satisfies CreateCharacterRequest;
 
   try {
-    const data = await api.characterControllerCreateV3(body);
+    const data = await api.createCharacter(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -81,11 +81,11 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
-## characterControllerGetByIdV3
+## deleteCharacter
 
-> EquosCharacter characterControllerGetByIdV3(id)
+> EquosCharacter deleteCharacter(id)
 
-Get Equos Character by ID.
+Delete an Equos Character. This action is irreversible.
 
 ### Example
 
@@ -94,7 +94,7 @@ import {
   Configuration,
   CharacterApi,
 } from '';
-import type { CharacterControllerGetByIdV3Request } from '';
+import type { DeleteCharacterRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
@@ -107,10 +107,10 @@ async function example() {
   const body = {
     // string | Equos Character ID
     id: id_example,
-  } satisfies CharacterControllerGetByIdV3Request;
+  } satisfies DeleteCharacterRequest;
 
   try {
-    const data = await api.characterControllerGetByIdV3(body);
+    const data = await api.deleteCharacter(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -150,9 +150,78 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
-## characterControllerListV3
+## getCharacter
 
-> ListEquosCharactersResponse characterControllerListV3(take, skip, client)
+> EquosCharacter getCharacter(id)
+
+Get Equos Character by ID.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  CharacterApi,
+} from '';
+import type { GetCharacterRequest } from '';
+
+async function example() {
+  console.log("🚀 Testing  SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: x-api-key
+    apiKey: "YOUR API KEY",
+  });
+  const api = new CharacterApi(config);
+
+  const body = {
+    // string | Equos Character ID
+    id: id_example,
+  } satisfies GetCharacterRequest;
+
+  try {
+    const data = await api.getCharacter(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `string` | Equos Character ID | [Defaults to `undefined`] |
+
+### Return type
+
+[**EquosCharacter**](EquosCharacter.md)
+
+### Authorization
+
+[x-api-key](../README.md#x-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## listCharacters
+
+> ListEquosCharactersResponse listCharacters(take, skip, client)
 
 List Equos Characters.
 
@@ -163,7 +232,7 @@ import {
   Configuration,
   CharacterApi,
 } from '';
-import type { CharacterControllerListV3Request } from '';
+import type { ListCharactersRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
@@ -180,10 +249,10 @@ async function example() {
     skip: 8.14,
     // string (optional)
     client: client_example,
-  } satisfies CharacterControllerListV3Request;
+  } satisfies ListCharactersRequest;
 
   try {
-    const data = await api.characterControllerListV3(body);
+    const data = await api.listCharacters(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -225,78 +294,9 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
-## characterControllerSoftDeleteV3
+## updateCharacter
 
-> EquosCharacter characterControllerSoftDeleteV3(id)
-
-Delete an Equos Character. This action is irreversible.
-
-### Example
-
-```ts
-import {
-  Configuration,
-  CharacterApi,
-} from '';
-import type { CharacterControllerSoftDeleteV3Request } from '';
-
-async function example() {
-  console.log("🚀 Testing  SDK...");
-  const config = new Configuration({ 
-    // To configure API key authorization: x-api-key
-    apiKey: "YOUR API KEY",
-  });
-  const api = new CharacterApi(config);
-
-  const body = {
-    // string | Equos Character ID
-    id: id_example,
-  } satisfies CharacterControllerSoftDeleteV3Request;
-
-  try {
-    const data = await api.characterControllerSoftDeleteV3(body);
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// Run the test
-example().catch(console.error);
-```
-
-### Parameters
-
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Equos Character ID | [Defaults to `undefined`] |
-
-### Return type
-
-[**EquosCharacter**](EquosCharacter.md)
-
-### Authorization
-
-[x-api-key](../README.md#x-api-key)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
-
-
-## characterControllerUpdateV3
-
-> EquosCharacter characterControllerUpdateV3(id, updateEquosCharacterRequest)
+> EquosCharacter updateCharacter(id, updateEquosCharacterRequest)
 
 Update character properties.
 
@@ -307,7 +307,7 @@ import {
   Configuration,
   CharacterApi,
 } from '';
-import type { CharacterControllerUpdateV3Request } from '';
+import type { UpdateCharacterRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
@@ -322,10 +322,10 @@ async function example() {
     id: id_example,
     // UpdateEquosCharacterRequest
     updateEquosCharacterRequest: ...,
-  } satisfies CharacterControllerUpdateV3Request;
+  } satisfies UpdateCharacterRequest;
 
   try {
-    const data = await api.characterControllerUpdateV3(body);
+    const data = await api.updateCharacter(body);
     console.log(data);
   } catch (error) {
     console.error(error);

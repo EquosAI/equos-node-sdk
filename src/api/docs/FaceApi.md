@@ -4,16 +4,16 @@ All URIs are relative to *http://localhost:3001*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**faceControllerCreateV3**](FaceApi.md#facecontrollercreatev3) | **POST** /v3/faces | Create a new Equos Face. |
-| [**faceControllerGetByIdV3**](FaceApi.md#facecontrollergetbyidv3) | **GET** /v3/faces/{id} | Get Equos Face by ID. |
-| [**faceControllerListV3**](FaceApi.md#facecontrollerlistv3) | **GET** /v3/faces | List Equos Faces. |
-| [**faceControllerSoftDeleteV3**](FaceApi.md#facecontrollersoftdeletev3) | **DELETE** /v3/faces/{id} | Delete an Equos Face. This action is irreversible. |
+| [**createFace**](FaceApi.md#createface) | **POST** /v3/faces | Create a new Equos Face. |
+| [**deleteFace**](FaceApi.md#deleteface) | **DELETE** /v3/faces/{id} | Delete an Equos Face. This action is irreversible. |
+| [**getFace**](FaceApi.md#getface) | **GET** /v3/faces/{id} | Get Equos Face by ID. |
+| [**listFaces**](FaceApi.md#listfaces) | **GET** /v3/faces | List Equos Faces. |
 
 
 
-## faceControllerCreateV3
+## createFace
 
-> EquosFace faceControllerCreateV3(createEquosFaceRequest)
+> EquosFace createFace(createEquosFaceRequest)
 
 Create a new Equos Face.
 
@@ -24,7 +24,7 @@ import {
   Configuration,
   FaceApi,
 } from '';
-import type { FaceControllerCreateV3Request } from '';
+import type { CreateFaceRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
@@ -37,10 +37,10 @@ async function example() {
   const body = {
     // CreateEquosFaceRequest
     createEquosFaceRequest: ...,
-  } satisfies FaceControllerCreateV3Request;
+  } satisfies CreateFaceRequest;
 
   try {
-    const data = await api.faceControllerCreateV3(body);
+    const data = await api.createFace(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -80,11 +80,11 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
-## faceControllerGetByIdV3
+## deleteFace
 
-> EquosFace faceControllerGetByIdV3(id)
+> EquosFace deleteFace(id)
 
-Get Equos Face by ID.
+Delete an Equos Face. This action is irreversible.
 
 ### Example
 
@@ -93,7 +93,7 @@ import {
   Configuration,
   FaceApi,
 } from '';
-import type { FaceControllerGetByIdV3Request } from '';
+import type { DeleteFaceRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
@@ -106,10 +106,10 @@ async function example() {
   const body = {
     // string | Equos Face ID
     id: id_example,
-  } satisfies FaceControllerGetByIdV3Request;
+  } satisfies DeleteFaceRequest;
 
   try {
-    const data = await api.faceControllerGetByIdV3(body);
+    const data = await api.deleteFace(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -149,9 +149,78 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
-## faceControllerListV3
+## getFace
 
-> ListEquosFacesResponse faceControllerListV3(take, skip, client)
+> EquosFace getFace(id)
+
+Get Equos Face by ID.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  FaceApi,
+} from '';
+import type { GetFaceRequest } from '';
+
+async function example() {
+  console.log("🚀 Testing  SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: x-api-key
+    apiKey: "YOUR API KEY",
+  });
+  const api = new FaceApi(config);
+
+  const body = {
+    // string | Equos Face ID
+    id: id_example,
+  } satisfies GetFaceRequest;
+
+  try {
+    const data = await api.getFace(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `string` | Equos Face ID | [Defaults to `undefined`] |
+
+### Return type
+
+[**EquosFace**](EquosFace.md)
+
+### Authorization
+
+[x-api-key](../README.md#x-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## listFaces
+
+> ListEquosFacesResponse listFaces(take, skip, client)
 
 List Equos Faces.
 
@@ -162,7 +231,7 @@ import {
   Configuration,
   FaceApi,
 } from '';
-import type { FaceControllerListV3Request } from '';
+import type { ListFacesRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
@@ -179,10 +248,10 @@ async function example() {
     skip: 8.14,
     // string (optional)
     client: client_example,
-  } satisfies FaceControllerListV3Request;
+  } satisfies ListFacesRequest;
 
   try {
-    const data = await api.faceControllerListV3(body);
+    const data = await api.listFaces(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -205,75 +274,6 @@ example().catch(console.error);
 ### Return type
 
 [**ListEquosFacesResponse**](ListEquosFacesResponse.md)
-
-### Authorization
-
-[x-api-key](../README.md#x-api-key)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
-
-
-## faceControllerSoftDeleteV3
-
-> EquosFace faceControllerSoftDeleteV3(id)
-
-Delete an Equos Face. This action is irreversible.
-
-### Example
-
-```ts
-import {
-  Configuration,
-  FaceApi,
-} from '';
-import type { FaceControllerSoftDeleteV3Request } from '';
-
-async function example() {
-  console.log("🚀 Testing  SDK...");
-  const config = new Configuration({ 
-    // To configure API key authorization: x-api-key
-    apiKey: "YOUR API KEY",
-  });
-  const api = new FaceApi(config);
-
-  const body = {
-    // string | Equos Face ID
-    id: id_example,
-  } satisfies FaceControllerSoftDeleteV3Request;
-
-  try {
-    const data = await api.faceControllerSoftDeleteV3(body);
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// Run the test
-example().catch(console.error);
-```
-
-### Parameters
-
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Equos Face ID | [Defaults to `undefined`] |
-
-### Return type
-
-[**EquosFace**](EquosFace.md)
 
 ### Authorization
 

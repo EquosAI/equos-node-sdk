@@ -31,25 +31,25 @@ import {
     UpdateEquosCharacterRequestToJSON,
 } from '../models/index';
 
-export interface CharacterControllerCreateV3Request {
+export interface CreateCharacterRequest {
     createEquosCharacterRequest: CreateEquosCharacterRequest;
 }
 
-export interface CharacterControllerGetByIdV3Request {
+export interface DeleteCharacterRequest {
     id: string;
 }
 
-export interface CharacterControllerListV3Request {
+export interface GetCharacterRequest {
+    id: string;
+}
+
+export interface ListCharactersRequest {
     take?: number;
     skip?: number;
     client?: string;
 }
 
-export interface CharacterControllerSoftDeleteV3Request {
-    id: string;
-}
-
-export interface CharacterControllerUpdateV3Request {
+export interface UpdateCharacterRequest {
     id: string;
     updateEquosCharacterRequest: UpdateEquosCharacterRequest;
 }
@@ -62,11 +62,11 @@ export class CharacterApi extends runtime.BaseAPI {
     /**
      * Create a new Equos Character.
      */
-    async characterControllerCreateV3Raw(requestParameters: CharacterControllerCreateV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosCharacter>> {
+    async createCharacterRaw(requestParameters: CreateCharacterRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosCharacter>> {
         if (requestParameters['createEquosCharacterRequest'] == null) {
             throw new runtime.RequiredError(
                 'createEquosCharacterRequest',
-                'Required parameter "createEquosCharacterRequest" was null or undefined when calling characterControllerCreateV3().'
+                'Required parameter "createEquosCharacterRequest" was null or undefined when calling createCharacter().'
             );
         }
 
@@ -97,19 +97,60 @@ export class CharacterApi extends runtime.BaseAPI {
     /**
      * Create a new Equos Character.
      */
-    async characterControllerCreateV3(requestParameters: CharacterControllerCreateV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosCharacter> {
-        const response = await this.characterControllerCreateV3Raw(requestParameters, initOverrides);
+    async createCharacter(requestParameters: CreateCharacterRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosCharacter> {
+        const response = await this.createCharacterRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Delete an Equos Character. This action is irreversible.
+     */
+    async deleteCharacterRaw(requestParameters: DeleteCharacterRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosCharacter>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling deleteCharacter().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["x-api-key"] = await this.configuration.apiKey("x-api-key"); // x-api-key authentication
+        }
+
+
+        let urlPath = `/v3/characters/{id}`;
+        urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => EquosCharacterFromJSON(jsonValue));
+    }
+
+    /**
+     * Delete an Equos Character. This action is irreversible.
+     */
+    async deleteCharacter(requestParameters: DeleteCharacterRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosCharacter> {
+        const response = await this.deleteCharacterRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Equos Character by ID.
      */
-    async characterControllerGetByIdV3Raw(requestParameters: CharacterControllerGetByIdV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosCharacter>> {
+    async getCharacterRaw(requestParameters: GetCharacterRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosCharacter>> {
         if (requestParameters['id'] == null) {
             throw new runtime.RequiredError(
                 'id',
-                'Required parameter "id" was null or undefined when calling characterControllerGetByIdV3().'
+                'Required parameter "id" was null or undefined when calling getCharacter().'
             );
         }
 
@@ -138,15 +179,15 @@ export class CharacterApi extends runtime.BaseAPI {
     /**
      * Get Equos Character by ID.
      */
-    async characterControllerGetByIdV3(requestParameters: CharacterControllerGetByIdV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosCharacter> {
-        const response = await this.characterControllerGetByIdV3Raw(requestParameters, initOverrides);
+    async getCharacter(requestParameters: GetCharacterRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosCharacter> {
+        const response = await this.getCharacterRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Equos Characters.
      */
-    async characterControllerListV3Raw(requestParameters: CharacterControllerListV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListEquosCharactersResponse>> {
+    async listCharactersRaw(requestParameters: ListCharactersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListEquosCharactersResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['take'] != null) {
@@ -183,67 +224,26 @@ export class CharacterApi extends runtime.BaseAPI {
     /**
      * List Equos Characters.
      */
-    async characterControllerListV3(requestParameters: CharacterControllerListV3Request = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListEquosCharactersResponse> {
-        const response = await this.characterControllerListV3Raw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Delete an Equos Character. This action is irreversible.
-     */
-    async characterControllerSoftDeleteV3Raw(requestParameters: CharacterControllerSoftDeleteV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosCharacter>> {
-        if (requestParameters['id'] == null) {
-            throw new runtime.RequiredError(
-                'id',
-                'Required parameter "id" was null or undefined when calling characterControllerSoftDeleteV3().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["x-api-key"] = await this.configuration.apiKey("x-api-key"); // x-api-key authentication
-        }
-
-
-        let urlPath = `/v3/characters/{id}`;
-        urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
-
-        const response = await this.request({
-            path: urlPath,
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => EquosCharacterFromJSON(jsonValue));
-    }
-
-    /**
-     * Delete an Equos Character. This action is irreversible.
-     */
-    async characterControllerSoftDeleteV3(requestParameters: CharacterControllerSoftDeleteV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosCharacter> {
-        const response = await this.characterControllerSoftDeleteV3Raw(requestParameters, initOverrides);
+    async listCharacters(requestParameters: ListCharactersRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListEquosCharactersResponse> {
+        const response = await this.listCharactersRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Update character properties.
      */
-    async characterControllerUpdateV3Raw(requestParameters: CharacterControllerUpdateV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosCharacter>> {
+    async updateCharacterRaw(requestParameters: UpdateCharacterRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosCharacter>> {
         if (requestParameters['id'] == null) {
             throw new runtime.RequiredError(
                 'id',
-                'Required parameter "id" was null or undefined when calling characterControllerUpdateV3().'
+                'Required parameter "id" was null or undefined when calling updateCharacter().'
             );
         }
 
         if (requestParameters['updateEquosCharacterRequest'] == null) {
             throw new runtime.RequiredError(
                 'updateEquosCharacterRequest',
-                'Required parameter "updateEquosCharacterRequest" was null or undefined when calling characterControllerUpdateV3().'
+                'Required parameter "updateEquosCharacterRequest" was null or undefined when calling updateCharacter().'
             );
         }
 
@@ -275,8 +275,8 @@ export class CharacterApi extends runtime.BaseAPI {
     /**
      * Update character properties.
      */
-    async characterControllerUpdateV3(requestParameters: CharacterControllerUpdateV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosCharacter> {
-        const response = await this.characterControllerUpdateV3Raw(requestParameters, initOverrides);
+    async updateCharacter(requestParameters: UpdateCharacterRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosCharacter> {
+        const response = await this.updateCharacterRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

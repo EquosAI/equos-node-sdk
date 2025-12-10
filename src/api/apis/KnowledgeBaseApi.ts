@@ -14,37 +14,60 @@
 
 
 import * as runtime from '../runtime';
+import type {
+  CreateDocumentRequest,
+  CreateDocumentResponse,
+  CreateKnowledgeBaseRequest,
+  EquosDocument,
+  EquosKnowledgeBase,
+  ListEquosKnowledgeBasesResponse,
+} from '../models/index';
+import {
+    CreateDocumentRequestFromJSON,
+    CreateDocumentRequestToJSON,
+    CreateDocumentResponseFromJSON,
+    CreateDocumentResponseToJSON,
+    CreateKnowledgeBaseRequestFromJSON,
+    CreateKnowledgeBaseRequestToJSON,
+    EquosDocumentFromJSON,
+    EquosDocumentToJSON,
+    EquosKnowledgeBaseFromJSON,
+    EquosKnowledgeBaseToJSON,
+    ListEquosKnowledgeBasesResponseFromJSON,
+    ListEquosKnowledgeBasesResponseToJSON,
+} from '../models/index';
 
-export interface KnowledgeBaseControllerAddDocumentV3Request {
+export interface AddDocumentRequest {
     id: string;
-    body: object;
+    createDocumentRequest: CreateDocumentRequest;
 }
 
-export interface KnowledgeBaseControllerCreateKnowledgeBaseV3Request {
-    body: object;
+export interface CreateKnowledgeBaseOperationRequest {
+    createKnowledgeBaseRequest: CreateKnowledgeBaseRequest;
 }
 
-export interface KnowledgeBaseControllerDeleteDocV3Request {
+export interface DeleteDocumentRequest {
     id: string;
     doc: string;
 }
 
-export interface KnowledgeBaseControllerDeleteV3Request {
+export interface DeleteKnowledgeBaseRequest {
     id: string;
 }
 
-export interface KnowledgeBaseControllerGetByIdV3Request {
+export interface GetKnowledgeBaseRequest {
     id: string;
 }
 
-export interface KnowledgeBaseControllerIndexDocumentV3Request {
+export interface IndexDocumentRequest {
     id: string;
     doc: string;
 }
 
-export interface KnowledgeBaseControllerListV3Request {
-    take: string;
-    skip: string;
+export interface ListKnowledgeBasesRequest {
+    take?: number;
+    skip?: number;
+    client?: string;
 }
 
 /**
@@ -53,19 +76,20 @@ export interface KnowledgeBaseControllerListV3Request {
 export class KnowledgeBaseApi extends runtime.BaseAPI {
 
     /**
+     * Add a document to a Knowledge Base.
      */
-    async knowledgeBaseControllerAddDocumentV3Raw(requestParameters: KnowledgeBaseControllerAddDocumentV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+    async addDocumentRaw(requestParameters: AddDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateDocumentResponse>> {
         if (requestParameters['id'] == null) {
             throw new runtime.RequiredError(
                 'id',
-                'Required parameter "id" was null or undefined when calling knowledgeBaseControllerAddDocumentV3().'
+                'Required parameter "id" was null or undefined when calling addDocument().'
             );
         }
 
-        if (requestParameters['body'] == null) {
+        if (requestParameters['createDocumentRequest'] == null) {
             throw new runtime.RequiredError(
-                'body',
-                'Required parameter "body" was null or undefined when calling knowledgeBaseControllerAddDocumentV3().'
+                'createDocumentRequest',
+                'Required parameter "createDocumentRequest" was null or undefined when calling addDocument().'
             );
         }
 
@@ -88,25 +112,28 @@ export class KnowledgeBaseApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters['body'] as any,
+            body: CreateDocumentRequestToJSON(requestParameters['createDocumentRequest']),
         }, initOverrides);
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => CreateDocumentResponseFromJSON(jsonValue));
     }
 
     /**
+     * Add a document to a Knowledge Base.
      */
-    async knowledgeBaseControllerAddDocumentV3(requestParameters: KnowledgeBaseControllerAddDocumentV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
-        await this.knowledgeBaseControllerAddDocumentV3Raw(requestParameters, initOverrides);
+    async addDocument(requestParameters: AddDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateDocumentResponse> {
+        const response = await this.addDocumentRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
     /**
+     * Create a new Knowledge Base.
      */
-    async knowledgeBaseControllerCreateKnowledgeBaseV3Raw(requestParameters: KnowledgeBaseControllerCreateKnowledgeBaseV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters['body'] == null) {
+    async createKnowledgeBaseRaw(requestParameters: CreateKnowledgeBaseOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosKnowledgeBase>> {
+        if (requestParameters['createKnowledgeBaseRequest'] == null) {
             throw new runtime.RequiredError(
-                'body',
-                'Required parameter "body" was null or undefined when calling knowledgeBaseControllerCreateKnowledgeBaseV3().'
+                'createKnowledgeBaseRequest',
+                'Required parameter "createKnowledgeBaseRequest" was null or undefined when calling createKnowledgeBase().'
             );
         }
 
@@ -128,32 +155,35 @@ export class KnowledgeBaseApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters['body'] as any,
+            body: CreateKnowledgeBaseRequestToJSON(requestParameters['createKnowledgeBaseRequest']),
         }, initOverrides);
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => EquosKnowledgeBaseFromJSON(jsonValue));
     }
 
     /**
+     * Create a new Knowledge Base.
      */
-    async knowledgeBaseControllerCreateKnowledgeBaseV3(requestParameters: KnowledgeBaseControllerCreateKnowledgeBaseV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
-        await this.knowledgeBaseControllerCreateKnowledgeBaseV3Raw(requestParameters, initOverrides);
+    async createKnowledgeBase(requestParameters: CreateKnowledgeBaseOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosKnowledgeBase> {
+        const response = await this.createKnowledgeBaseRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
     /**
+     * Delete a document from a Knowledge Base.
      */
-    async knowledgeBaseControllerDeleteDocV3Raw(requestParameters: KnowledgeBaseControllerDeleteDocV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+    async deleteDocumentRaw(requestParameters: DeleteDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosDocument>> {
         if (requestParameters['id'] == null) {
             throw new runtime.RequiredError(
                 'id',
-                'Required parameter "id" was null or undefined when calling knowledgeBaseControllerDeleteDocV3().'
+                'Required parameter "id" was null or undefined when calling deleteDocument().'
             );
         }
 
         if (requestParameters['doc'] == null) {
             throw new runtime.RequiredError(
                 'doc',
-                'Required parameter "doc" was null or undefined when calling knowledgeBaseControllerDeleteDocV3().'
+                'Required parameter "doc" was null or undefined when calling deleteDocument().'
             );
         }
 
@@ -177,22 +207,25 @@ export class KnowledgeBaseApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => EquosDocumentFromJSON(jsonValue));
     }
 
     /**
+     * Delete a document from a Knowledge Base.
      */
-    async knowledgeBaseControllerDeleteDocV3(requestParameters: KnowledgeBaseControllerDeleteDocV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
-        await this.knowledgeBaseControllerDeleteDocV3Raw(requestParameters, initOverrides);
+    async deleteDocument(requestParameters: DeleteDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosDocument> {
+        const response = await this.deleteDocumentRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
     /**
+     * Delete a Knowledge Base. This action is irreversible.
      */
-    async knowledgeBaseControllerDeleteV3Raw(requestParameters: KnowledgeBaseControllerDeleteV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+    async deleteKnowledgeBaseRaw(requestParameters: DeleteKnowledgeBaseRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosKnowledgeBase>> {
         if (requestParameters['id'] == null) {
             throw new runtime.RequiredError(
                 'id',
-                'Required parameter "id" was null or undefined when calling knowledgeBaseControllerDeleteV3().'
+                'Required parameter "id" was null or undefined when calling deleteKnowledgeBase().'
             );
         }
 
@@ -215,22 +248,25 @@ export class KnowledgeBaseApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => EquosKnowledgeBaseFromJSON(jsonValue));
     }
 
     /**
+     * Delete a Knowledge Base. This action is irreversible.
      */
-    async knowledgeBaseControllerDeleteV3(requestParameters: KnowledgeBaseControllerDeleteV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
-        await this.knowledgeBaseControllerDeleteV3Raw(requestParameters, initOverrides);
+    async deleteKnowledgeBase(requestParameters: DeleteKnowledgeBaseRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosKnowledgeBase> {
+        const response = await this.deleteKnowledgeBaseRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
     /**
+     * Get Knowledge Base by ID.
      */
-    async knowledgeBaseControllerGetByIdV3Raw(requestParameters: KnowledgeBaseControllerGetByIdV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+    async getKnowledgeBaseRaw(requestParameters: GetKnowledgeBaseRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosKnowledgeBase>> {
         if (requestParameters['id'] == null) {
             throw new runtime.RequiredError(
                 'id',
-                'Required parameter "id" was null or undefined when calling knowledgeBaseControllerGetByIdV3().'
+                'Required parameter "id" was null or undefined when calling getKnowledgeBase().'
             );
         }
 
@@ -253,29 +289,32 @@ export class KnowledgeBaseApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => EquosKnowledgeBaseFromJSON(jsonValue));
     }
 
     /**
+     * Get Knowledge Base by ID.
      */
-    async knowledgeBaseControllerGetByIdV3(requestParameters: KnowledgeBaseControllerGetByIdV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
-        await this.knowledgeBaseControllerGetByIdV3Raw(requestParameters, initOverrides);
+    async getKnowledgeBase(requestParameters: GetKnowledgeBaseRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosKnowledgeBase> {
+        const response = await this.getKnowledgeBaseRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
     /**
+     * Index a document in a Knowledge Base.
      */
-    async knowledgeBaseControllerIndexDocumentV3Raw(requestParameters: KnowledgeBaseControllerIndexDocumentV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+    async indexDocumentRaw(requestParameters: IndexDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosDocument>> {
         if (requestParameters['id'] == null) {
             throw new runtime.RequiredError(
                 'id',
-                'Required parameter "id" was null or undefined when calling knowledgeBaseControllerIndexDocumentV3().'
+                'Required parameter "id" was null or undefined when calling indexDocument().'
             );
         }
 
         if (requestParameters['doc'] == null) {
             throw new runtime.RequiredError(
                 'doc',
-                'Required parameter "doc" was null or undefined when calling knowledgeBaseControllerIndexDocumentV3().'
+                'Required parameter "doc" was null or undefined when calling indexDocument().'
             );
         }
 
@@ -299,32 +338,21 @@ export class KnowledgeBaseApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => EquosDocumentFromJSON(jsonValue));
     }
 
     /**
+     * Index a document in a Knowledge Base.
      */
-    async knowledgeBaseControllerIndexDocumentV3(requestParameters: KnowledgeBaseControllerIndexDocumentV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
-        await this.knowledgeBaseControllerIndexDocumentV3Raw(requestParameters, initOverrides);
+    async indexDocument(requestParameters: IndexDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosDocument> {
+        const response = await this.indexDocumentRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
     /**
+     * List Knowledge Bases.
      */
-    async knowledgeBaseControllerListV3Raw(requestParameters: KnowledgeBaseControllerListV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters['take'] == null) {
-            throw new runtime.RequiredError(
-                'take',
-                'Required parameter "take" was null or undefined when calling knowledgeBaseControllerListV3().'
-            );
-        }
-
-        if (requestParameters['skip'] == null) {
-            throw new runtime.RequiredError(
-                'skip',
-                'Required parameter "skip" was null or undefined when calling knowledgeBaseControllerListV3().'
-            );
-        }
-
+    async listKnowledgeBasesRaw(requestParameters: ListKnowledgeBasesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListEquosKnowledgeBasesResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['take'] != null) {
@@ -333,6 +361,10 @@ export class KnowledgeBaseApi extends runtime.BaseAPI {
 
         if (requestParameters['skip'] != null) {
             queryParameters['skip'] = requestParameters['skip'];
+        }
+
+        if (requestParameters['client'] != null) {
+            queryParameters['client'] = requestParameters['client'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -351,13 +383,15 @@ export class KnowledgeBaseApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => ListEquosKnowledgeBasesResponseFromJSON(jsonValue));
     }
 
     /**
+     * List Knowledge Bases.
      */
-    async knowledgeBaseControllerListV3(requestParameters: KnowledgeBaseControllerListV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
-        await this.knowledgeBaseControllerListV3Raw(requestParameters, initOverrides);
+    async listKnowledgeBases(requestParameters: ListKnowledgeBasesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListEquosKnowledgeBasesResponse> {
+        const response = await this.listKnowledgeBasesRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
 }

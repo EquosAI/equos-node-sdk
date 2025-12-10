@@ -28,22 +28,22 @@ import {
     ListEquosVoicesResponseToJSON,
 } from '../models/index';
 
-export interface VoiceControllerCreateV3Request {
+export interface CreateVoiceRequest {
     createEquosVoiceRequest: CreateEquosVoiceRequest;
 }
 
-export interface VoiceControllerGetByIdV3Request {
+export interface DeleteVoiceRequest {
     id: string;
 }
 
-export interface VoiceControllerListV3Request {
+export interface GetVoiceRequest {
+    id: string;
+}
+
+export interface ListVoicesRequest {
     take?: number;
     skip?: number;
     client?: string;
-}
-
-export interface VoiceControllerSoftDeleteV3Request {
-    id: string;
 }
 
 /**
@@ -54,11 +54,11 @@ export class VoiceApi extends runtime.BaseAPI {
     /**
      * Create a new Equos Voice.
      */
-    async voiceControllerCreateV3Raw(requestParameters: VoiceControllerCreateV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosVoice>> {
+    async createVoiceRaw(requestParameters: CreateVoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosVoice>> {
         if (requestParameters['createEquosVoiceRequest'] == null) {
             throw new runtime.RequiredError(
                 'createEquosVoiceRequest',
-                'Required parameter "createEquosVoiceRequest" was null or undefined when calling voiceControllerCreateV3().'
+                'Required parameter "createEquosVoiceRequest" was null or undefined when calling createVoice().'
             );
         }
 
@@ -89,19 +89,60 @@ export class VoiceApi extends runtime.BaseAPI {
     /**
      * Create a new Equos Voice.
      */
-    async voiceControllerCreateV3(requestParameters: VoiceControllerCreateV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosVoice> {
-        const response = await this.voiceControllerCreateV3Raw(requestParameters, initOverrides);
+    async createVoice(requestParameters: CreateVoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosVoice> {
+        const response = await this.createVoiceRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Delete an Equos Voice. This action is irreversible.
+     */
+    async deleteVoiceRaw(requestParameters: DeleteVoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosVoice>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling deleteVoice().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["x-api-key"] = await this.configuration.apiKey("x-api-key"); // x-api-key authentication
+        }
+
+
+        let urlPath = `/v3/voices/{id}`;
+        urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => EquosVoiceFromJSON(jsonValue));
+    }
+
+    /**
+     * Delete an Equos Voice. This action is irreversible.
+     */
+    async deleteVoice(requestParameters: DeleteVoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosVoice> {
+        const response = await this.deleteVoiceRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Equos Voice by ID.
      */
-    async voiceControllerGetByIdV3Raw(requestParameters: VoiceControllerGetByIdV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosVoice>> {
+    async getVoiceRaw(requestParameters: GetVoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosVoice>> {
         if (requestParameters['id'] == null) {
             throw new runtime.RequiredError(
                 'id',
-                'Required parameter "id" was null or undefined when calling voiceControllerGetByIdV3().'
+                'Required parameter "id" was null or undefined when calling getVoice().'
             );
         }
 
@@ -130,15 +171,15 @@ export class VoiceApi extends runtime.BaseAPI {
     /**
      * Get Equos Voice by ID.
      */
-    async voiceControllerGetByIdV3(requestParameters: VoiceControllerGetByIdV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosVoice> {
-        const response = await this.voiceControllerGetByIdV3Raw(requestParameters, initOverrides);
+    async getVoice(requestParameters: GetVoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosVoice> {
+        const response = await this.getVoiceRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Equos Voices.
      */
-    async voiceControllerListV3Raw(requestParameters: VoiceControllerListV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListEquosVoicesResponse>> {
+    async listVoicesRaw(requestParameters: ListVoicesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListEquosVoicesResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['take'] != null) {
@@ -175,49 +216,8 @@ export class VoiceApi extends runtime.BaseAPI {
     /**
      * List Equos Voices.
      */
-    async voiceControllerListV3(requestParameters: VoiceControllerListV3Request = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListEquosVoicesResponse> {
-        const response = await this.voiceControllerListV3Raw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Delete an Equos Voice. This action is irreversible.
-     */
-    async voiceControllerSoftDeleteV3Raw(requestParameters: VoiceControllerSoftDeleteV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EquosVoice>> {
-        if (requestParameters['id'] == null) {
-            throw new runtime.RequiredError(
-                'id',
-                'Required parameter "id" was null or undefined when calling voiceControllerSoftDeleteV3().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["x-api-key"] = await this.configuration.apiKey("x-api-key"); // x-api-key authentication
-        }
-
-
-        let urlPath = `/v3/voices/{id}`;
-        urlPath = urlPath.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
-
-        const response = await this.request({
-            path: urlPath,
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => EquosVoiceFromJSON(jsonValue));
-    }
-
-    /**
-     * Delete an Equos Voice. This action is irreversible.
-     */
-    async voiceControllerSoftDeleteV3(requestParameters: VoiceControllerSoftDeleteV3Request, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EquosVoice> {
-        const response = await this.voiceControllerSoftDeleteV3Raw(requestParameters, initOverrides);
+    async listVoices(requestParameters: ListVoicesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListEquosVoicesResponse> {
+        const response = await this.listVoicesRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

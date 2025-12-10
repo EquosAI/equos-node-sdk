@@ -4,21 +4,21 @@ All URIs are relative to *http://localhost:3001*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**knowledgeBaseControllerAddDocumentV3**](KnowledgeBaseApi.md#knowledgebasecontrolleradddocumentv3) | **POST** /v3/knowledge-bases/{id}/documents |  |
-| [**knowledgeBaseControllerCreateKnowledgeBaseV3**](KnowledgeBaseApi.md#knowledgebasecontrollercreateknowledgebasev3) | **POST** /v3/knowledge-bases |  |
-| [**knowledgeBaseControllerDeleteDocV3**](KnowledgeBaseApi.md#knowledgebasecontrollerdeletedocv3) | **DELETE** /v3/knowledge-bases/{id}/documents/{doc} |  |
-| [**knowledgeBaseControllerDeleteV3**](KnowledgeBaseApi.md#knowledgebasecontrollerdeletev3) | **DELETE** /v3/knowledge-bases/{id} |  |
-| [**knowledgeBaseControllerGetByIdV3**](KnowledgeBaseApi.md#knowledgebasecontrollergetbyidv3) | **GET** /v3/knowledge-bases/{id} |  |
-| [**knowledgeBaseControllerIndexDocumentV3**](KnowledgeBaseApi.md#knowledgebasecontrollerindexdocumentv3) | **PATCH** /v3/knowledge-bases/{id}/documents/{doc}/index |  |
-| [**knowledgeBaseControllerListV3**](KnowledgeBaseApi.md#knowledgebasecontrollerlistv3) | **GET** /v3/knowledge-bases |  |
+| [**addDocument**](KnowledgeBaseApi.md#adddocument) | **POST** /v3/knowledge-bases/{id}/documents | Add a document to a Knowledge Base. |
+| [**createKnowledgeBase**](KnowledgeBaseApi.md#createknowledgebaseoperation) | **POST** /v3/knowledge-bases | Create a new Knowledge Base. |
+| [**deleteDocument**](KnowledgeBaseApi.md#deletedocument) | **DELETE** /v3/knowledge-bases/{id}/documents/{doc} | Delete a document from a Knowledge Base. |
+| [**deleteKnowledgeBase**](KnowledgeBaseApi.md#deleteknowledgebase) | **DELETE** /v3/knowledge-bases/{id} | Delete a Knowledge Base. This action is irreversible. |
+| [**getKnowledgeBase**](KnowledgeBaseApi.md#getknowledgebase) | **GET** /v3/knowledge-bases/{id} | Get Knowledge Base by ID. |
+| [**indexDocument**](KnowledgeBaseApi.md#indexdocument) | **PATCH** /v3/knowledge-bases/{id}/documents/{doc}/index | Index a document in a Knowledge Base. |
+| [**listKnowledgeBases**](KnowledgeBaseApi.md#listknowledgebases) | **GET** /v3/knowledge-bases | List Knowledge Bases. |
 
 
 
-## knowledgeBaseControllerAddDocumentV3
+## addDocument
 
-> knowledgeBaseControllerAddDocumentV3(id, body)
+> CreateDocumentResponse addDocument(id, createDocumentRequest)
 
-
+Add a document to a Knowledge Base.
 
 ### Example
 
@@ -27,7 +27,7 @@ import {
   Configuration,
   KnowledgeBaseApi,
 } from '';
-import type { KnowledgeBaseControllerAddDocumentV3Request } from '';
+import type { AddDocumentRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
@@ -38,14 +38,14 @@ async function example() {
   const api = new KnowledgeBaseApi(config);
 
   const body = {
-    // string
+    // string | Knowledge Base ID
     id: id_example,
-    // object
-    body: Object,
-  } satisfies KnowledgeBaseControllerAddDocumentV3Request;
+    // CreateDocumentRequest
+    createDocumentRequest: ...,
+  } satisfies AddDocumentRequest;
 
   try {
-    const data = await api.knowledgeBaseControllerAddDocumentV3(body);
+    const data = await api.addDocument(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -61,12 +61,12 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
-| **body** | `object` |  | |
+| **id** | `string` | Knowledge Base ID | [Defaults to `undefined`] |
+| **createDocumentRequest** | [CreateDocumentRequest](CreateDocumentRequest.md) |  | |
 
 ### Return type
 
-`void` (Empty response body)
+[**CreateDocumentResponse**](CreateDocumentResponse.md)
 
 ### Authorization
 
@@ -75,7 +75,7 @@ example().catch(console.error);
 ### HTTP request headers
 
 - **Content-Type**: `application/json`
-- **Accept**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
@@ -86,11 +86,11 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
-## knowledgeBaseControllerCreateKnowledgeBaseV3
+## createKnowledgeBase
 
-> knowledgeBaseControllerCreateKnowledgeBaseV3(body)
+> EquosKnowledgeBase createKnowledgeBase(createKnowledgeBaseRequest)
 
-
+Create a new Knowledge Base.
 
 ### Example
 
@@ -99,7 +99,7 @@ import {
   Configuration,
   KnowledgeBaseApi,
 } from '';
-import type { KnowledgeBaseControllerCreateKnowledgeBaseV3Request } from '';
+import type { CreateKnowledgeBaseOperationRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
@@ -110,12 +110,12 @@ async function example() {
   const api = new KnowledgeBaseApi(config);
 
   const body = {
-    // object
-    body: Object,
-  } satisfies KnowledgeBaseControllerCreateKnowledgeBaseV3Request;
+    // CreateKnowledgeBaseRequest
+    createKnowledgeBaseRequest: ...,
+  } satisfies CreateKnowledgeBaseOperationRequest;
 
   try {
-    const data = await api.knowledgeBaseControllerCreateKnowledgeBaseV3(body);
+    const data = await api.createKnowledgeBase(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -131,11 +131,11 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **body** | `object` |  | |
+| **createKnowledgeBaseRequest** | [CreateKnowledgeBaseRequest](CreateKnowledgeBaseRequest.md) |  | |
 
 ### Return type
 
-`void` (Empty response body)
+[**EquosKnowledgeBase**](EquosKnowledgeBase.md)
 
 ### Authorization
 
@@ -144,7 +144,7 @@ example().catch(console.error);
 ### HTTP request headers
 
 - **Content-Type**: `application/json`
-- **Accept**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
@@ -155,11 +155,11 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
-## knowledgeBaseControllerDeleteDocV3
+## deleteDocument
 
-> knowledgeBaseControllerDeleteDocV3(id, doc)
+> EquosDocument deleteDocument(id, doc)
 
-
+Delete a document from a Knowledge Base.
 
 ### Example
 
@@ -168,7 +168,7 @@ import {
   Configuration,
   KnowledgeBaseApi,
 } from '';
-import type { KnowledgeBaseControllerDeleteDocV3Request } from '';
+import type { DeleteDocumentRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
@@ -179,14 +179,14 @@ async function example() {
   const api = new KnowledgeBaseApi(config);
 
   const body = {
-    // string
+    // string | Knowledge Base ID
     id: id_example,
-    // string
+    // string | Document ID
     doc: doc_example,
-  } satisfies KnowledgeBaseControllerDeleteDocV3Request;
+  } satisfies DeleteDocumentRequest;
 
   try {
-    const data = await api.knowledgeBaseControllerDeleteDocV3(body);
+    const data = await api.deleteDocument(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -202,12 +202,12 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
-| **doc** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Knowledge Base ID | [Defaults to `undefined`] |
+| **doc** | `string` | Document ID | [Defaults to `undefined`] |
 
 ### Return type
 
-`void` (Empty response body)
+[**EquosDocument**](EquosDocument.md)
 
 ### Authorization
 
@@ -216,7 +216,7 @@ example().catch(console.error);
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
@@ -227,11 +227,11 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
-## knowledgeBaseControllerDeleteV3
+## deleteKnowledgeBase
 
-> knowledgeBaseControllerDeleteV3(id)
+> EquosKnowledgeBase deleteKnowledgeBase(id)
 
-
+Delete a Knowledge Base. This action is irreversible.
 
 ### Example
 
@@ -240,7 +240,7 @@ import {
   Configuration,
   KnowledgeBaseApi,
 } from '';
-import type { KnowledgeBaseControllerDeleteV3Request } from '';
+import type { DeleteKnowledgeBaseRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
@@ -251,12 +251,12 @@ async function example() {
   const api = new KnowledgeBaseApi(config);
 
   const body = {
-    // string
+    // string | Knowledge Base ID
     id: id_example,
-  } satisfies KnowledgeBaseControllerDeleteV3Request;
+  } satisfies DeleteKnowledgeBaseRequest;
 
   try {
-    const data = await api.knowledgeBaseControllerDeleteV3(body);
+    const data = await api.deleteKnowledgeBase(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -272,11 +272,11 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Knowledge Base ID | [Defaults to `undefined`] |
 
 ### Return type
 
-`void` (Empty response body)
+[**EquosKnowledgeBase**](EquosKnowledgeBase.md)
 
 ### Authorization
 
@@ -285,7 +285,7 @@ example().catch(console.error);
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
@@ -296,11 +296,11 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
-## knowledgeBaseControllerGetByIdV3
+## getKnowledgeBase
 
-> knowledgeBaseControllerGetByIdV3(id)
+> EquosKnowledgeBase getKnowledgeBase(id)
 
-
+Get Knowledge Base by ID.
 
 ### Example
 
@@ -309,7 +309,7 @@ import {
   Configuration,
   KnowledgeBaseApi,
 } from '';
-import type { KnowledgeBaseControllerGetByIdV3Request } from '';
+import type { GetKnowledgeBaseRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
@@ -320,12 +320,12 @@ async function example() {
   const api = new KnowledgeBaseApi(config);
 
   const body = {
-    // string
+    // string | Knowledge Base ID
     id: id_example,
-  } satisfies KnowledgeBaseControllerGetByIdV3Request;
+  } satisfies GetKnowledgeBaseRequest;
 
   try {
-    const data = await api.knowledgeBaseControllerGetByIdV3(body);
+    const data = await api.getKnowledgeBase(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -341,11 +341,11 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Knowledge Base ID | [Defaults to `undefined`] |
 
 ### Return type
 
-`void` (Empty response body)
+[**EquosKnowledgeBase**](EquosKnowledgeBase.md)
 
 ### Authorization
 
@@ -354,7 +354,7 @@ example().catch(console.error);
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
@@ -365,11 +365,11 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
-## knowledgeBaseControllerIndexDocumentV3
+## indexDocument
 
-> knowledgeBaseControllerIndexDocumentV3(id, doc)
+> EquosDocument indexDocument(id, doc)
 
-
+Index a document in a Knowledge Base.
 
 ### Example
 
@@ -378,7 +378,7 @@ import {
   Configuration,
   KnowledgeBaseApi,
 } from '';
-import type { KnowledgeBaseControllerIndexDocumentV3Request } from '';
+import type { IndexDocumentRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
@@ -389,14 +389,14 @@ async function example() {
   const api = new KnowledgeBaseApi(config);
 
   const body = {
-    // string
+    // string | Knowledge Base ID
     id: id_example,
-    // string
+    // string | Document ID
     doc: doc_example,
-  } satisfies KnowledgeBaseControllerIndexDocumentV3Request;
+  } satisfies IndexDocumentRequest;
 
   try {
-    const data = await api.knowledgeBaseControllerIndexDocumentV3(body);
+    const data = await api.indexDocument(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -412,12 +412,12 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
-| **doc** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Knowledge Base ID | [Defaults to `undefined`] |
+| **doc** | `string` | Document ID | [Defaults to `undefined`] |
 
 ### Return type
 
-`void` (Empty response body)
+[**EquosDocument**](EquosDocument.md)
 
 ### Authorization
 
@@ -426,7 +426,7 @@ example().catch(console.error);
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
@@ -437,11 +437,11 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
-## knowledgeBaseControllerListV3
+## listKnowledgeBases
 
-> knowledgeBaseControllerListV3(take, skip)
+> ListEquosKnowledgeBasesResponse listKnowledgeBases(take, skip, client)
 
-
+List Knowledge Bases.
 
 ### Example
 
@@ -450,7 +450,7 @@ import {
   Configuration,
   KnowledgeBaseApi,
 } from '';
-import type { KnowledgeBaseControllerListV3Request } from '';
+import type { ListKnowledgeBasesRequest } from '';
 
 async function example() {
   console.log("🚀 Testing  SDK...");
@@ -461,14 +461,16 @@ async function example() {
   const api = new KnowledgeBaseApi(config);
 
   const body = {
-    // string
-    take: take_example,
-    // string
-    skip: skip_example,
-  } satisfies KnowledgeBaseControllerListV3Request;
+    // number (optional)
+    take: 8.14,
+    // number (optional)
+    skip: 8.14,
+    // string (optional)
+    client: client_example,
+  } satisfies ListKnowledgeBasesRequest;
 
   try {
-    const data = await api.knowledgeBaseControllerListV3(body);
+    const data = await api.listKnowledgeBases(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -484,12 +486,13 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **take** | `string` |  | [Defaults to `undefined`] |
-| **skip** | `string` |  | [Defaults to `undefined`] |
+| **take** | `number` |  | [Optional] [Defaults to `20`] |
+| **skip** | `number` |  | [Optional] [Defaults to `0`] |
+| **client** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
-`void` (Empty response body)
+[**ListEquosKnowledgeBasesResponse**](ListEquosKnowledgeBasesResponse.md)
 
 ### Authorization
 
@@ -498,7 +501,7 @@ example().catch(console.error);
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
