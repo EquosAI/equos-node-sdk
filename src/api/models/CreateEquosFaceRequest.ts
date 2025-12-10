@@ -39,7 +39,14 @@ export interface CreateEquosFaceRequest {
  */
 export const CreateEquosFaceRequestIdentityEnum = {
     Byron: 'byron',
-    Emily: 'emily'
+    Emily: 'emily',
+    Marise: 'marise',
+    Jenny: 'jenny',
+    Isabelle: 'isabelle',
+    William: 'william',
+    Elaryon: 'elaryon',
+    Stephen: 'stephen',
+    Ryan: 'ryan'
 } as const;
 export type CreateEquosFaceRequestIdentityEnum = typeof CreateEquosFaceRequestIdentityEnum[keyof typeof CreateEquosFaceRequestIdentityEnum];
 
