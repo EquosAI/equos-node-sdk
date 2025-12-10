@@ -1,12 +1,6 @@
-export * from './equos';
-export * from './types/error.type';
+// New client (recommended)
+export { EquosClient, EquosOptions } from './client';
 
-export * from './types/agent.type';
-export * from './types/avatar.type';
-export * from './types/session.type';
-export * from './types/knowledge-base.type';
-
-export * from './apis/agent';
-export * from './apis/avatar';
-export * from './apis/session';
-export * from './apis/knowledge-base';
+// Generated API exports (models and API classes)
+export * from './api/models';
+export * from './api/apis';
