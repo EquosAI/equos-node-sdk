@@ -45,10 +45,10 @@ export interface EquosLimitResponse {
     suspended: boolean;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof EquosLimitResponse
      */
-    reason?: object | null;
+    reason?: string | null;
     /**
      * 
      * @type {Date}

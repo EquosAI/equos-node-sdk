@@ -7,6 +7,8 @@
 Name | Type
 ------------ | -------------
 `document` | [EquosDocument](EquosDocument.md)
+`uploadUrl` | string
+`expireAt` | Date
 
 ## Example
 
@@ -16,6 +18,8 @@ import type { CreateDocumentResponse } from ''
 // TODO: Update the object below with actual values
 const example = {
   "document": null,
+  "uploadUrl": null,
+  "expireAt": null,
 } satisfies CreateDocumentResponse
 
 console.log(example)

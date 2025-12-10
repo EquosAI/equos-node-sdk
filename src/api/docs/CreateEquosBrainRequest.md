@@ -6,7 +6,7 @@
 
 Name | Type
 ------------ | -------------
-`client` | object
+`client` | string
 `name` | string
 `instructions` | string
 `greetingMessage` | string

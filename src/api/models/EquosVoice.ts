@@ -33,10 +33,10 @@ export interface EquosVoice {
     organizationId: string;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof EquosVoice
      */
-    client?: object | null;
+    client?: string | null;
     /**
      * 
      * @type {string}

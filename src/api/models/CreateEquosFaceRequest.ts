@@ -21,10 +21,10 @@ import { mapValues } from '../runtime';
 export interface CreateEquosFaceRequest {
     /**
      * Client identifier associated with the face. This is useful to segment resources by client.
-     * @type {object}
+     * @type {string}
      * @memberof CreateEquosFaceRequest
      */
-    client?: object | null;
+    client?: string | null;
     /**
      * Identity of the face in Equos Gallery.
      * @type {string}

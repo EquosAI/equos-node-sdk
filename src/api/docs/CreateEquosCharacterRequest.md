@@ -6,15 +6,15 @@
 
 Name | Type
 ------------ | -------------
-`client` | object
+`client` | string
 `name` | string
 `livekitIdentity` | string
-`faceId` | object
-`voiceId` | object
-`brainId` | object
-`knowledgeBaseId` | object
+`faceId` | string
+`voiceId` | string
+`brainId` | string
+`knowledgeBaseId` | string
 `search` | boolean
-`elevenlabsAgentId` | object
+`elevenlabsAgentId` | string
 
 ## Example
 

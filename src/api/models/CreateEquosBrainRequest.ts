@@ -21,10 +21,10 @@ import { mapValues } from '../runtime';
 export interface CreateEquosBrainRequest {
     /**
      * Client identifier associated with the brain. This is useful to segment resources by client.
-     * @type {object}
+     * @type {string}
      * @memberof CreateEquosBrainRequest
      */
-    client?: object | null;
+    client?: string | null;
     /**
      * 
      * @type {string}

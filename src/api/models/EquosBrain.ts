@@ -33,10 +33,10 @@ export interface EquosBrain {
     organizationId: string;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof EquosBrain
      */
-    client?: object | null;
+    client?: string | null;
     /**
      * 
      * @type {string}

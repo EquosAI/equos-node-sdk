@@ -27,28 +27,28 @@ export interface UpdateEquosCharacterRequest {
     name?: string;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof UpdateEquosCharacterRequest
      */
-    faceId?: object | null;
+    faceId?: string | null;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof UpdateEquosCharacterRequest
      */
-    voiceId?: object | null;
+    voiceId?: string | null;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof UpdateEquosCharacterRequest
      */
-    brainId?: object | null;
+    brainId?: string | null;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof UpdateEquosCharacterRequest
      */
-    knowledgeBaseId?: object | null;
+    knowledgeBaseId?: string | null;
     /**
      * 
      * @type {boolean}
@@ -57,10 +57,10 @@ export interface UpdateEquosCharacterRequest {
     search?: boolean;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof UpdateEquosCharacterRequest
      */
-    elevenlabsAgentId?: object | null;
+    elevenlabsAgentId?: string | null;
 }
 
 /**

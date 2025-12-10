@@ -9,13 +9,11 @@ Name | Type
 `id` | string
 `status` | string
 `organizationId` | string
-`client` | object
-`description` | object
-`thumbnailUrl` | object
-`thumbnailNoBgUrl` | object
-`referenceImgUrl` | object
-`referenceImgNoBgUrl` | object
-`videoUrl` | object
+`client` | string
+`description` | string
+`thumbnailUrl` | string
+`referenceImgUrl` | string
+`videoUrl` | string
 `createdAt` | Date
 `updatedAt` | Date
 
@@ -32,9 +30,7 @@ const example = {
   "client": null,
   "description": null,
   "thumbnailUrl": null,
-  "thumbnailNoBgUrl": null,
   "referenceImgUrl": null,
-  "referenceImgNoBgUrl": null,
   "videoUrl": null,
   "createdAt": null,
   "updatedAt": null,

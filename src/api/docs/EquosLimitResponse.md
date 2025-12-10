@@ -10,7 +10,7 @@ Name | Type
 `concurrent` | number
 `duration` | number
 `suspended` | boolean
-`reason` | object
+`reason` | string
 `createdAt` | Date
 `updatedAt` | Date
 

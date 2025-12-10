@@ -62,10 +62,10 @@ export interface EquosCharacter {
     organizationId: string;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof EquosCharacter
      */
-    client?: object | null;
+    client?: string | null;
     /**
      * 
      * @type {string}
@@ -86,34 +86,34 @@ export interface EquosCharacter {
     search: boolean;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof EquosCharacter
      */
-    elevenlabsAgentId?: object | null;
+    elevenlabsAgentId?: string | null;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof EquosCharacter
      */
-    faceId?: object | null;
+    faceId?: string | null;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof EquosCharacter
      */
-    voiceId?: object | null;
+    voiceId?: string | null;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof EquosCharacter
      */
-    brainId?: object | null;
+    brainId?: string | null;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof EquosCharacter
      */
-    knowledgeBaseId?: object | null;
+    knowledgeBaseId?: string | null;
     /**
      * 
      * @type {EquosFace}

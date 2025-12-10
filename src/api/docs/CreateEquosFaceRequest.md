@@ -6,7 +6,7 @@
 
 Name | Type
 ------------ | -------------
-`client` | object
+`client` | string
 `identity` | string
 
 ## Example

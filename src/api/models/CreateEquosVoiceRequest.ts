@@ -21,10 +21,10 @@ import { mapValues } from '../runtime';
 export interface CreateEquosVoiceRequest {
     /**
      * Client identifier associated with the voice. This is useful to segment resources by client.
-     * @type {object}
+     * @type {string}
      * @memberof CreateEquosVoiceRequest
      */
-    client?: object | null;
+    client?: string | null;
     /**
      * 
      * @type {string}

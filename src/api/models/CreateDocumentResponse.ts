@@ -33,6 +33,18 @@ export interface CreateDocumentResponse {
      * @memberof CreateDocumentResponse
      */
     document: EquosDocument;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateDocumentResponse
+     */
+    uploadUrl: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CreateDocumentResponse
+     */
+    expireAt: Date;
 }
 
 /**
@@ -40,6 +52,8 @@ export interface CreateDocumentResponse {
  */
 export function instanceOfCreateDocumentResponse(value: object): value is CreateDocumentResponse {
     if (!('document' in value) || value['document'] === undefined) return false;
+    if (!('uploadUrl' in value) || value['uploadUrl'] === undefined) return false;
+    if (!('expireAt' in value) || value['expireAt'] === undefined) return false;
     return true;
 }
 
@@ -54,6 +68,8 @@ export function CreateDocumentResponseFromJSONTyped(json: any, ignoreDiscriminat
     return {
         
         'document': EquosDocumentFromJSON(json['document']),
+        'uploadUrl': json['uploadUrl'],
+        'expireAt': (new Date(json['expireAt'])),
     };
 }
 
@@ -69,6 +85,8 @@ export function CreateDocumentResponseToJSONTyped(value?: CreateDocumentResponse
     return {
         
         'document': EquosDocumentToJSON(value['document']),
+        'uploadUrl': value['uploadUrl'],
+        'expireAt': value['expireAt'].toISOString(),
     };
 }
 

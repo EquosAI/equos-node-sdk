@@ -21,10 +21,10 @@ import { mapValues } from '../runtime';
 export interface CreateEquosCharacterRequest {
     /**
      * Client identifier associated with the character. This is useful to segment resources by client.
-     * @type {object}
+     * @type {string}
      * @memberof CreateEquosCharacterRequest
      */
-    client?: object | null;
+    client?: string | null;
     /**
      * 
      * @type {string}
@@ -39,28 +39,28 @@ export interface CreateEquosCharacterRequest {
     livekitIdentity: string;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof CreateEquosCharacterRequest
      */
-    faceId?: object | null;
+    faceId?: string | null;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof CreateEquosCharacterRequest
      */
-    voiceId?: object | null;
+    voiceId?: string | null;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof CreateEquosCharacterRequest
      */
-    brainId?: object | null;
+    brainId?: string | null;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof CreateEquosCharacterRequest
      */
-    knowledgeBaseId?: object | null;
+    knowledgeBaseId?: string | null;
     /**
      * 
      * @type {boolean}
@@ -69,10 +69,10 @@ export interface CreateEquosCharacterRequest {
     search?: boolean;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof CreateEquosCharacterRequest
      */
-    elevenlabsAgentId?: object | null;
+    elevenlabsAgentId?: string | null;
 }
 
 /**

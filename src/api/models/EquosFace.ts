@@ -39,46 +39,34 @@ export interface EquosFace {
     organizationId: string;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof EquosFace
      */
-    client?: object | null;
+    client?: string | null;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof EquosFace
      */
-    description?: object | null;
+    description?: string | null;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof EquosFace
      */
-    thumbnailUrl?: object | null;
+    thumbnailUrl?: string | null;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof EquosFace
      */
-    thumbnailNoBgUrl?: object | null;
+    referenceImgUrl?: string | null;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof EquosFace
      */
-    referenceImgUrl?: object | null;
-    /**
-     * 
-     * @type {object}
-     * @memberof EquosFace
-     */
-    referenceImgNoBgUrl?: object | null;
-    /**
-     * 
-     * @type {object}
-     * @memberof EquosFace
-     */
-    videoUrl?: object | null;
+    videoUrl?: string | null;
     /**
      * 
      * @type {Date}
@@ -133,9 +121,7 @@ export function EquosFaceFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'client': json['client'] == null ? undefined : json['client'],
         'description': json['description'] == null ? undefined : json['description'],
         'thumbnailUrl': json['thumbnailUrl'] == null ? undefined : json['thumbnailUrl'],
-        'thumbnailNoBgUrl': json['thumbnailNoBgUrl'] == null ? undefined : json['thumbnailNoBgUrl'],
         'referenceImgUrl': json['referenceImgUrl'] == null ? undefined : json['referenceImgUrl'],
-        'referenceImgNoBgUrl': json['referenceImgNoBgUrl'] == null ? undefined : json['referenceImgNoBgUrl'],
         'videoUrl': json['videoUrl'] == null ? undefined : json['videoUrl'],
         'createdAt': (new Date(json['createdAt'])),
         'updatedAt': (new Date(json['updatedAt'])),
@@ -159,9 +145,7 @@ export function EquosFaceToJSONTyped(value?: EquosFace | null, ignoreDiscriminat
         'client': value['client'],
         'description': value['description'],
         'thumbnailUrl': value['thumbnailUrl'],
-        'thumbnailNoBgUrl': value['thumbnailNoBgUrl'],
         'referenceImgUrl': value['referenceImgUrl'],
-        'referenceImgNoBgUrl': value['referenceImgNoBgUrl'],
         'videoUrl': value['videoUrl'],
         'createdAt': value['createdAt'].toISOString(),
         'updatedAt': value['updatedAt'].toISOString(),

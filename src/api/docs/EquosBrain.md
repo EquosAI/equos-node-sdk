@@ -8,7 +8,7 @@ Name | Type
 ------------ | -------------
 `id` | string
 `organizationId` | string
-`client` | object
+`client` | string
 `name` | string
 `instructions` | string
 `greetingMessage` | string
