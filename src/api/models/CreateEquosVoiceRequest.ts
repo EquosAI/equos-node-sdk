@@ -30,35 +30,59 @@ export interface CreateEquosVoiceRequest {
      * @type {string}
      * @memberof CreateEquosVoiceRequest
      */
-    name: string;
+    identity: CreateEquosVoiceRequestIdentityEnum;
     /**
-     * 
+     * Instructions for the voice such as tone, rythm, etc.
      * @type {string}
      * @memberof CreateEquosVoiceRequest
      */
-    description: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateEquosVoiceRequest
-     */
-    sampleUrl: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateEquosVoiceRequest
-     */
-    voiceId: string;
+    instructions?: string | null;
 }
+
+
+/**
+ * @export
+ */
+export const CreateEquosVoiceRequestIdentityEnum = {
+    Puck: 'Puck',
+    Charon: 'Charon',
+    Kore: 'Kore',
+    Fenrir: 'Fenrir',
+    Aoede: 'Aoede',
+    Leda: 'Leda',
+    Orus: 'Orus',
+    Zephyr: 'Zephyr',
+    Sulafat: 'Sulafat',
+    Sadachbia: 'Sadachbia',
+    Sadaltager: 'Sadaltager',
+    Vindemiatrix: 'Vindemiatrix',
+    Zubenelgenubi: 'Zubenelgenubi',
+    Achird: 'Achird',
+    Pulcherrima: 'Pulcherrima',
+    Gacrux: 'Gacrux',
+    Schedar: 'Schedar',
+    Alnilam: 'Alnilam',
+    Achernar: 'Achernar',
+    Laomedeia: 'Laomedeia',
+    Rasalgethi: 'Rasalgethi',
+    Algenib: 'Algenib',
+    Erinome: 'Erinome',
+    Despina: 'Despina',
+    Algieba: 'Algieba',
+    Umbriel: 'Umbriel',
+    Iapetus: 'Iapetus',
+    Enceladus: 'Enceladus',
+    Autonoe: 'Autonoe',
+    Callirrhoe: 'Callirrhoe'
+} as const;
+export type CreateEquosVoiceRequestIdentityEnum = typeof CreateEquosVoiceRequestIdentityEnum[keyof typeof CreateEquosVoiceRequestIdentityEnum];
+
 
 /**
  * Check if a given object implements the CreateEquosVoiceRequest interface.
  */
 export function instanceOfCreateEquosVoiceRequest(value: object): value is CreateEquosVoiceRequest {
-    if (!('name' in value) || value['name'] === undefined) return false;
-    if (!('description' in value) || value['description'] === undefined) return false;
-    if (!('sampleUrl' in value) || value['sampleUrl'] === undefined) return false;
-    if (!('voiceId' in value) || value['voiceId'] === undefined) return false;
+    if (!('identity' in value) || value['identity'] === undefined) return false;
     return true;
 }
 
@@ -73,10 +97,8 @@ export function CreateEquosVoiceRequestFromJSONTyped(json: any, ignoreDiscrimina
     return {
         
         'client': json['client'] == null ? undefined : json['client'],
-        'name': json['name'],
-        'description': json['description'],
-        'sampleUrl': json['sampleUrl'],
-        'voiceId': json['voiceId'],
+        'identity': json['identity'],
+        'instructions': json['instructions'] == null ? undefined : json['instructions'],
     };
 }
 
@@ -92,10 +114,8 @@ export function CreateEquosVoiceRequestToJSONTyped(value?: CreateEquosVoiceReque
     return {
         
         'client': value['client'],
-        'name': value['name'],
-        'description': value['description'],
-        'sampleUrl': value['sampleUrl'],
-        'voiceId': value['voiceId'],
+        'identity': value['identity'],
+        'instructions': value['instructions'],
     };
 }
 

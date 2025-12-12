@@ -42,25 +42,13 @@ export interface EquosVoice {
      * @type {string}
      * @memberof EquosVoice
      */
-    name: string;
+    identity: string;
     /**
      * 
      * @type {string}
      * @memberof EquosVoice
      */
-    description: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EquosVoice
-     */
-    sampleUrl: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EquosVoice
-     */
-    voiceId: string;
+    instructions?: string | null;
     /**
      * 
      * @type {Date}
@@ -81,10 +69,7 @@ export interface EquosVoice {
 export function instanceOfEquosVoice(value: object): value is EquosVoice {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('organizationId' in value) || value['organizationId'] === undefined) return false;
-    if (!('name' in value) || value['name'] === undefined) return false;
-    if (!('description' in value) || value['description'] === undefined) return false;
-    if (!('sampleUrl' in value) || value['sampleUrl'] === undefined) return false;
-    if (!('voiceId' in value) || value['voiceId'] === undefined) return false;
+    if (!('identity' in value) || value['identity'] === undefined) return false;
     if (!('createdAt' in value) || value['createdAt'] === undefined) return false;
     if (!('updatedAt' in value) || value['updatedAt'] === undefined) return false;
     return true;
@@ -103,10 +88,8 @@ export function EquosVoiceFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'id': json['id'],
         'organizationId': json['organizationId'],
         'client': json['client'] == null ? undefined : json['client'],
-        'name': json['name'],
-        'description': json['description'],
-        'sampleUrl': json['sampleUrl'],
-        'voiceId': json['voiceId'],
+        'identity': json['identity'],
+        'instructions': json['instructions'] == null ? undefined : json['instructions'],
         'createdAt': (new Date(json['createdAt'])),
         'updatedAt': (new Date(json['updatedAt'])),
     };
@@ -126,10 +109,8 @@ export function EquosVoiceToJSONTyped(value?: EquosVoice | null, ignoreDiscrimin
         'id': value['id'],
         'organizationId': value['organizationId'],
         'client': value['client'],
-        'name': value['name'],
-        'description': value['description'],
-        'sampleUrl': value['sampleUrl'],
-        'voiceId': value['voiceId'],
+        'identity': value['identity'],
+        'instructions': value['instructions'],
         'createdAt': value['createdAt'].toISOString(),
         'updatedAt': value['updatedAt'].toISOString(),
     };

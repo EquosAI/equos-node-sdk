@@ -30,12 +30,6 @@ export interface CreateEquosBrainRequest {
      * @type {string}
      * @memberof CreateEquosBrainRequest
      */
-    name: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateEquosBrainRequest
-     */
     instructions: string;
     /**
      * 
@@ -55,7 +49,6 @@ export interface CreateEquosBrainRequest {
  * Check if a given object implements the CreateEquosBrainRequest interface.
  */
 export function instanceOfCreateEquosBrainRequest(value: object): value is CreateEquosBrainRequest {
-    if (!('name' in value) || value['name'] === undefined) return false;
     if (!('instructions' in value) || value['instructions'] === undefined) return false;
     if (!('greetingMessage' in value) || value['greetingMessage'] === undefined) return false;
     if (!('model' in value) || value['model'] === undefined) return false;
@@ -73,7 +66,6 @@ export function CreateEquosBrainRequestFromJSONTyped(json: any, ignoreDiscrimina
     return {
         
         'client': json['client'] == null ? undefined : json['client'],
-        'name': json['name'],
         'instructions': json['instructions'],
         'greetingMessage': json['greetingMessage'],
         'model': json['model'],
@@ -92,7 +84,6 @@ export function CreateEquosBrainRequestToJSONTyped(value?: CreateEquosBrainReque
     return {
         
         'client': value['client'],
-        'name': value['name'],
         'instructions': value['instructions'],
         'greetingMessage': value['greetingMessage'],
         'model': value['model'],

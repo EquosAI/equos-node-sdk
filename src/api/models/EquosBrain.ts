@@ -42,12 +42,6 @@ export interface EquosBrain {
      * @type {string}
      * @memberof EquosBrain
      */
-    name: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EquosBrain
-     */
     instructions: string;
     /**
      * 
@@ -75,7 +69,6 @@ export interface EquosBrain {
 export function instanceOfEquosBrain(value: object): value is EquosBrain {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('organizationId' in value) || value['organizationId'] === undefined) return false;
-    if (!('name' in value) || value['name'] === undefined) return false;
     if (!('instructions' in value) || value['instructions'] === undefined) return false;
     if (!('greetingMessage' in value) || value['greetingMessage'] === undefined) return false;
     if (!('createdAt' in value) || value['createdAt'] === undefined) return false;
@@ -96,7 +89,6 @@ export function EquosBrainFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'id': json['id'],
         'organizationId': json['organizationId'],
         'client': json['client'] == null ? undefined : json['client'],
-        'name': json['name'],
         'instructions': json['instructions'],
         'greetingMessage': json['greetingMessage'],
         'createdAt': (new Date(json['createdAt'])),
@@ -118,7 +110,6 @@ export function EquosBrainToJSONTyped(value?: EquosBrain | null, ignoreDiscrimin
         'id': value['id'],
         'organizationId': value['organizationId'],
         'client': value['client'],
-        'name': value['name'],
         'instructions': value['instructions'],
         'greetingMessage': value['greetingMessage'],
         'createdAt': value['createdAt'].toISOString(),

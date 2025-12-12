@@ -9,7 +9,6 @@ Name | Type
 `id` | string
 `organizationId` | string
 `client` | string
-`name` | string
 `instructions` | string
 `greetingMessage` | string
 `createdAt` | Date
@@ -25,7 +24,6 @@ const example = {
   "id": null,
   "organizationId": null,
   "client": null,
-  "name": null,
   "instructions": null,
   "greetingMessage": null,
   "createdAt": null,

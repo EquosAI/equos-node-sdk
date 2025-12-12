@@ -7,7 +7,6 @@
 Name | Type
 ------------ | -------------
 `client` | string
-`name` | string
 `instructions` | string
 `greetingMessage` | string
 `model` | string
@@ -20,7 +19,6 @@ import type { CreateEquosBrainRequest } from ''
 // TODO: Update the object below with actual values
 const example = {
   "client": null,
-  "name": null,
   "instructions": null,
   "greetingMessage": null,
   "model": null,

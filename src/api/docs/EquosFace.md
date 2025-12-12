@@ -7,13 +7,12 @@
 Name | Type
 ------------ | -------------
 `id` | string
-`status` | string
+`identity` | string
 `organizationId` | string
 `client` | string
 `description` | string
 `thumbnailUrl` | string
 `referenceImgUrl` | string
-`videoUrl` | string
 `createdAt` | Date
 `updatedAt` | Date
 
@@ -25,13 +24,12 @@ import type { EquosFace } from ''
 // TODO: Update the object below with actual values
 const example = {
   "id": null,
-  "status": null,
+  "identity": null,
   "organizationId": null,
   "client": null,
   "description": null,
   "thumbnailUrl": null,
   "referenceImgUrl": null,
-  "videoUrl": null,
   "createdAt": null,
   "updatedAt": null,
 } satisfies EquosFace

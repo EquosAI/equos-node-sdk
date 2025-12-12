@@ -7,10 +7,8 @@
 Name | Type
 ------------ | -------------
 `client` | string
-`name` | string
-`description` | string
-`sampleUrl` | string
-`voiceId` | string
+`identity` | string
+`instructions` | string
 
 ## Example
 
@@ -20,10 +18,8 @@ import type { CreateEquosVoiceRequest } from ''
 // TODO: Update the object below with actual values
 const example = {
   "client": null,
-  "name": null,
-  "description": null,
-  "sampleUrl": null,
-  "voiceId": null,
+  "identity": null,
+  "instructions": null,
 } satisfies CreateEquosVoiceRequest
 
 console.log(example)

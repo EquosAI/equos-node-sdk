@@ -9,10 +9,8 @@ Name | Type
 `id` | string
 `organizationId` | string
 `client` | string
-`name` | string
-`description` | string
-`sampleUrl` | string
-`voiceId` | string
+`identity` | string
+`instructions` | string
 `createdAt` | Date
 `updatedAt` | Date
 
@@ -26,10 +24,8 @@ const example = {
   "id": null,
   "organizationId": null,
   "client": null,
-  "name": null,
-  "description": null,
-  "sampleUrl": null,
-  "voiceId": null,
+  "identity": null,
+  "instructions": null,
   "createdAt": null,
   "updatedAt": null,
 } satisfies EquosVoice

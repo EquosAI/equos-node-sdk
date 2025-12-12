@@ -30,7 +30,7 @@ export interface EquosFace {
      * @type {string}
      * @memberof EquosFace
      */
-    status: EquosFaceStatusEnum;
+    identity: EquosFaceIdentityEnum;
     /**
      * 
      * @type {string}
@@ -63,12 +63,6 @@ export interface EquosFace {
     referenceImgUrl?: string | null;
     /**
      * 
-     * @type {string}
-     * @memberof EquosFace
-     */
-    videoUrl?: string | null;
-    /**
-     * 
      * @type {Date}
      * @memberof EquosFace
      */
@@ -85,12 +79,18 @@ export interface EquosFace {
 /**
  * @export
  */
-export const EquosFaceStatusEnum = {
-    Processing: 'processing',
-    Ready: 'ready',
-    Error: 'error'
+export const EquosFaceIdentityEnum = {
+    Byron: 'byron',
+    Emily: 'emily',
+    Marise: 'marise',
+    Jenny: 'jenny',
+    Isabelle: 'isabelle',
+    William: 'william',
+    Elaryon: 'elaryon',
+    Stephen: 'stephen',
+    Ryan: 'ryan'
 } as const;
-export type EquosFaceStatusEnum = typeof EquosFaceStatusEnum[keyof typeof EquosFaceStatusEnum];
+export type EquosFaceIdentityEnum = typeof EquosFaceIdentityEnum[keyof typeof EquosFaceIdentityEnum];
 
 
 /**
@@ -98,7 +98,7 @@ export type EquosFaceStatusEnum = typeof EquosFaceStatusEnum[keyof typeof EquosF
  */
 export function instanceOfEquosFace(value: object): value is EquosFace {
     if (!('id' in value) || value['id'] === undefined) return false;
-    if (!('status' in value) || value['status'] === undefined) return false;
+    if (!('identity' in value) || value['identity'] === undefined) return false;
     if (!('organizationId' in value) || value['organizationId'] === undefined) return false;
     if (!('createdAt' in value) || value['createdAt'] === undefined) return false;
     if (!('updatedAt' in value) || value['updatedAt'] === undefined) return false;
@@ -116,13 +116,12 @@ export function EquosFaceFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     return {
         
         'id': json['id'],
-        'status': json['status'],
+        'identity': json['identity'],
         'organizationId': json['organizationId'],
         'client': json['client'] == null ? undefined : json['client'],
         'description': json['description'] == null ? undefined : json['description'],
         'thumbnailUrl': json['thumbnailUrl'] == null ? undefined : json['thumbnailUrl'],
         'referenceImgUrl': json['referenceImgUrl'] == null ? undefined : json['referenceImgUrl'],
-        'videoUrl': json['videoUrl'] == null ? undefined : json['videoUrl'],
         'createdAt': (new Date(json['createdAt'])),
         'updatedAt': (new Date(json['updatedAt'])),
     };
@@ -140,13 +139,12 @@ export function EquosFaceToJSONTyped(value?: EquosFace | null, ignoreDiscriminat
     return {
         
         'id': value['id'],
-        'status': value['status'],
+        'identity': value['identity'],
         'organizationId': value['organizationId'],
         'client': value['client'],
         'description': value['description'],
         'thumbnailUrl': value['thumbnailUrl'],
         'referenceImgUrl': value['referenceImgUrl'],
-        'videoUrl': value['videoUrl'],
         'createdAt': value['createdAt'].toISOString(),
         'updatedAt': value['updatedAt'].toISOString(),
     };
