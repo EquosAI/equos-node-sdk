@@ -42,7 +42,7 @@ export interface EquosVoice {
      * @type {string}
      * @memberof EquosVoice
      */
-    identity: string;
+    identity: EquosVoiceIdentityEnum;
     /**
      * 
      * @type {string}
@@ -62,6 +62,45 @@ export interface EquosVoice {
      */
     updatedAt: Date;
 }
+
+
+/**
+ * @export
+ */
+export const EquosVoiceIdentityEnum = {
+    Puck: 'Puck',
+    Charon: 'Charon',
+    Kore: 'Kore',
+    Fenrir: 'Fenrir',
+    Aoede: 'Aoede',
+    Leda: 'Leda',
+    Orus: 'Orus',
+    Zephyr: 'Zephyr',
+    Sulafat: 'Sulafat',
+    Sadachbia: 'Sadachbia',
+    Sadaltager: 'Sadaltager',
+    Vindemiatrix: 'Vindemiatrix',
+    Zubenelgenubi: 'Zubenelgenubi',
+    Achird: 'Achird',
+    Pulcherrima: 'Pulcherrima',
+    Gacrux: 'Gacrux',
+    Schedar: 'Schedar',
+    Alnilam: 'Alnilam',
+    Achernar: 'Achernar',
+    Laomedeia: 'Laomedeia',
+    Rasalgethi: 'Rasalgethi',
+    Algenib: 'Algenib',
+    Erinome: 'Erinome',
+    Despina: 'Despina',
+    Algieba: 'Algieba',
+    Umbriel: 'Umbriel',
+    Iapetus: 'Iapetus',
+    Enceladus: 'Enceladus',
+    Autonoe: 'Autonoe',
+    Callirrhoe: 'Callirrhoe'
+} as const;
+export type EquosVoiceIdentityEnum = typeof EquosVoiceIdentityEnum[keyof typeof EquosVoiceIdentityEnum];
+
 
 /**
  * Check if a given object implements the EquosVoice interface.
