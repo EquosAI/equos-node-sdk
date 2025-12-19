@@ -42,7 +42,7 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "@equos/core": "^3.0.2-rc.1",
+    "@equos/core": "^3.0.2-rc.2",
     "axios": "^1.11.0"
   },
   "devDependencies": {
