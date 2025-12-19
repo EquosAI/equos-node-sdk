@@ -7,7 +7,6 @@ import {
   FaceApi,
   HealthApi,
   KnowledgeBaseApi,
-  LimitsApi,
   SessionPassesApi,
   SessionsApi,
   VoiceApi,
@@ -36,7 +35,6 @@ export class EquosClient {
   public readonly faces: FaceApi;
   public readonly health: HealthApi;
   public readonly knowledgeBases: KnowledgeBaseApi;
-  public readonly limits: LimitsApi;
   public readonly sessionPasses: SessionPassesApi;
   public readonly sessions: SessionsApi;
   public readonly voices: VoiceApi;
@@ -61,7 +59,6 @@ export class EquosClient {
     this.faces = new FaceApi(this.configuration);
     this.health = new HealthApi(this.configuration);
     this.knowledgeBases = new KnowledgeBaseApi(this.configuration);
-    this.limits = new LimitsApi(this.configuration);
     this.sessionPasses = new SessionPassesApi(this.configuration);
     this.sessions = new SessionsApi(this.configuration);
     this.voices = new VoiceApi(this.configuration);
