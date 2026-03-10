@@ -7,6 +7,7 @@ import {
   HealthApi,
   KnowledgeBaseApi,
   OrganizationApi,
+  TokensApi,
   VoiceApi,
 } from '@equos/core';
 
@@ -34,6 +35,7 @@ export class EquosClient {
   public readonly voices: VoiceApi;
   public readonly conversations: ConversationApi;
   public readonly organizations: OrganizationApi;
+  public readonly tokens: TokensApi;
 
   private constructor(apiKey: string, options?: EquosOptions) {
     const endpoint = options?.endpoint || 'https://api.equos.ai';
@@ -56,6 +58,7 @@ export class EquosClient {
     this.voices = new VoiceApi(this.configuration);
     this.conversations = new ConversationApi(this.configuration);
     this.organizations = new OrganizationApi(this.configuration);
+    this.tokens = new TokensApi(this.configuration);
   }
 
   /**
