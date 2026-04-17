@@ -9,14 +9,15 @@
     "sdk",
     "equos.ai",
     "equos",
-    "react",
-    "elevenlabs",
+    "live",
     "realtime",
     "agent",
+    "avatar",
     "webrtc",
     "browser",
-    "openai",
-    "gemini"
+    "gemini",
+    "conversation",
+    "conversational-ai"
   ],
   "homepage": "https://github.com/EquosAI/equos-node-sdk#readme",
   "bugs": {
@@ -42,7 +43,7 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "@equos/core": "^3.1.1-rc.0",
+    "@equos/core": "^3.1.2",
     "axios": "^1.11.0"
   },
   "devDependencies": {

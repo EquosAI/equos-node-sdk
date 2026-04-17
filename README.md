@@ -2,13 +2,24 @@
 
 [Equos.ai](https://www.equos.ai) official Node.js SDK - Build AI-powered avatars with lifelike faces, voices, and brains.
 
+## Equos SDKs
+
+| SDK | Platform | Package |
+|-----|----------|---------|
+| **@equos/browser-sdk** | Browser (vanilla JS/TS) | [npm](https://www.npmjs.com/package/@equos/browser-sdk) |
+| **@equos/react** | Browser (React) | [npm](https://www.npmjs.com/package/@equos/react) |
+| **@equos/node-sdk** | Node.js (server-side only) | [npm](https://www.npmjs.com/package/@equos/node-sdk) |
+| **equos** | Python (server-side only) | [PyPI](https://pypi.org/project/equos/) |
+
 ## Features
 
 - ✅ **Full TypeScript Support** - Auto-generated types from OpenAPI specification
 - ✅ **Automatic API Key Management** - API key automatically added to all requests
 - ✅ **Character Management** - Create and manage AI characters with faces, voices, and brains
 - ✅ **Resource Management** - Manage faces, voices, brains, and knowledge bases
-- ✅ **Health & Limits** - Monitor API health and organization limits
+- ✅ **Conversations** - Start, stop, list, and fetch live avatar conversations
+- ✅ **Client Tokens** - Mint short-lived tokens for browser and mobile SDKs
+- ✅ **Health & Organization** - Monitor API health and freemium usage
 
 ## Prerequisites
 
@@ -281,7 +292,120 @@ await client.brains.deleteBrain({
 });
 ```
 
-### Health & Limits
+### Knowledge Bases
+
+Knowledge bases let characters ground responses in your own documents.
+
+#### Create a Knowledge Base
+
+```typescript
+import { CreateKnowledgeBaseRequest } from '@equos/node-sdk';
+
+const kbData: CreateKnowledgeBaseRequest = {
+  name: 'Product Docs',
+  client: 'my-app', // Optional
+};
+
+const kb = await client.knowledgeBases.createKnowledgeBase({
+  createKnowledgeBaseRequest: kbData,
+});
+```
+
+#### List Knowledge Bases
+
+```typescript
+const kbs = await client.knowledgeBases.listKnowledgeBases({
+  take: 10,
+  skip: 0,
+});
+```
+
+#### Add and Index a Document
+
+```typescript
+const doc = await client.knowledgeBases.addDocument({
+  id: 'kb-id',
+  createDocumentRequest: {
+    name: 'pricing.pdf',
+    url: 'https://example.com/pricing.pdf',
+  },
+});
+
+await client.knowledgeBases.indexDocument({
+  id: 'kb-id',
+  doc: doc.id,
+});
+```
+
+#### Delete a Document or Knowledge Base
+
+```typescript
+await client.knowledgeBases.deleteDocument({ id: 'kb-id', doc: 'doc-id' });
+await client.knowledgeBases.deleteKnowledgeBase({ id: 'kb-id' });
+```
+
+### Conversations
+
+Conversations are live sessions between a user and a character.
+
+#### Start a Conversation
+
+```typescript
+import { CreateEquosConversationRequest } from '@equos/node-sdk';
+
+const conversationData: CreateEquosConversationRequest = {
+  name: 'Support chat',
+  characterId: 'character-id',
+  maxSeconds: 600, // Optional: cap the session duration
+  promptCtx: 'Customer is on the Enterprise plan.', // Optional
+};
+
+const conversation = await client.conversations.startConversation({
+  createEquosConversationRequest: conversationData,
+});
+
+console.log('Room:', conversation.room);
+console.log('Token:', conversation.token);
+```
+
+#### List and Fetch Conversations
+
+```typescript
+const conversations = await client.conversations.listConversations({
+  take: 10,
+  skip: 0,
+});
+
+const conversation = await client.conversations.getConversationById({
+  id: 'conversation-id',
+});
+```
+
+#### Stop a Conversation
+
+```typescript
+await client.conversations.stopConversation({
+  id: 'conversation-id',
+});
+```
+
+### Client Tokens
+
+Generate short-lived tokens so a browser or mobile client can connect to a character without exposing your API key.
+
+```typescript
+const token = await client.tokens.createToken({
+  createEquosTokenRequest: {
+    user: 'user-123',
+    character: 'character-id', // Optional
+    client: 'my-app', // Optional
+  },
+});
+
+// Hand `token` to your frontend (@equos/browser-sdk or @equos/react)
+```
+
+### Health & Organization
 
 #### Check API Health
 
@@ -291,19 +415,11 @@ console.log('Status:', health.status);
 console.log('Version:', health.version);
 ```
 
-#### Get Organization Limits
+#### Get Freemium Usage
 
 ```typescript
-const limits = await client.limits.getLimit();
-
-if (limits) {
-  console.log('Concurrent sessions:', limits.concurrent);
-  console.log('Max duration:', limits.duration);
-  console.log('Suspended:', limits.suspended);
-  if (limits.reason) {
-    console.log('Reason:', limits.reason);
-  }
-}
+const used = await client.organizations.getFreemiumUsage();
+console.log('Freemium seconds used:', used);
 ```
 
 ## Complete Example
@@ -378,7 +494,7 @@ try {
 
 ## TypeScript Support
 
-All types are automatically generated from the OpenAPI specification:
+Request and response types ship with the package:
 
 ```typescript
 import {
@@ -393,36 +509,16 @@ import {
 } from '@equos/node-sdk';
 ```
 
-## Deprecated APIs
+## Reach Us
 
-> ⚠️ **Note**: The following APIs are deprecated and will be removed in a future version. Please migrate to the Character-based APIs above.
->
-> - **Avatars API** (`client.avatars.*`) - Use Characters API instead
-> - **Agents API** (`client.agents.*`) - Use Brains API instead
-> - **Sessions API** (`client.sessions.*`) - Deprecated
-> - **Session Passes API** (`client.sessionPasses.*`) - Deprecated
->
-> These APIs are marked as `deprecated: true` in the OpenAPI specification.
+- Equos Slack Community: [Join Equos Community Slack](https://join.slack.com/t/equosaicommunity/shared_invite/zt-3d8oy19au-jZpsJB0i~gdL0jbDswdzzQ)
+- Support: [Support Form](https://docs.google.com/forms/d/e/1FAIpQLSdoK7LvORdQf7KOQKvhhlESStJcKc3bDB9HPsEet6LuOmVUfQ/viewform)
 
-## Regenerating the Client
-
-The SDK is auto-generated from the OpenAPI specification. To regenerate after API changes:
-
-1. Ensure your backend API is running on `http://localhost:3001`
-2. Run:
-
-```bash
-npm run generate
-```
-
-This fetches the latest OpenAPI spec and regenerates all TypeScript code.
-
-## Resources
+## Documentation
 
 - Official Documentation: [https://docs.equos.ai](https://docs.equos.ai)
-- Equos NodeJS Examples: [GitHub Examples](https://github.com/EquosAI/equos-examples/tree/main/examples/equos-nextjs-integration)
-- Equos Slack Community: [Join Slack](https://join.slack.com/t/equosaicommunity/shared_invite/zt-3d8oy19au-jZpsJB0i~gdL0jbDswdzzQ)
-- Support: [Support Form](https://docs.google.com/forms/d/e/1FAIpQLSdoK7LvORdQf7KOQKvhhlESStJcKc3bDB9HPsEet6LuOmVUfQ/viewform)
+- Equos NodeJS Examples: [https://github.com/EquosAI/equos-examples/tree/main/examples/equos-nextjs-integration](https://github.com/EquosAI/equos-examples/tree/main/examples/equos-nextjs-integration)
+- Equos React Examples: [https://github.com/EquosAI/equos-examples/blob/main/examples/equos-react-integration/README.md](https://github.com/EquosAI/equos-examples/blob/main/examples/equos-react-integration/README.md)
 
 ## License
 
